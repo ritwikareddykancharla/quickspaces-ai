@@ -41,7 +41,7 @@
 3. **Upload / Ingest Your Own File (`+ Ingest File / Asset`)**:
    - Drop any `.csv`, `.vtt`, or `.md` file (or load a 1-click sample), see automatic PII column detection + multi-modal chunking, and immediately query it in chat.
 4. **Run the Governance Onboarding Agent**:
-   - Inspect open policy violations (`62/100`) and click **Auto-Remediate All Violations** to apply PII masking, revoke guest shares, pin `eu-central-1` KMS residency, and emit a SHA-256 audit receipt (`100/100`).
+   - Inspect open policy violations across the 3 Spaces (`59.7/100` mean baseline: `45/100`, `75/100`, `59/100`) and click **Auto-Remediate All Violations** to apply PII masking, revoke guest shares, pin `eu-central-1` KMS residency, and emit a SHA-256 audit receipt (`100/100`).
 
 ---
 

@@ -1,220 +1,439 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>QuickSpaces — Enterprise AI Workspace, Multi-Modal RAG &amp; Governance</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="QuickSpaces: Multi-modal enterprise workspaces (CSV, BI dashboards, call transcripts, RFCs), zero-leakage ACL hybrid RAG on Amazon Bedrock Nova, dynamic PII masking, and automated governance onboarding." />
+  <meta name="theme-color" content="#f2f5fa" />
+  <title>QuickSpaces: Multi-Modal Enterprise Spaces &amp; Governed RAG | Ritwika Kancharla</title>
+  <script>
+    (function () {
+      var h = location.hash || "";
+      var t = h.indexOf("theme=dark") !== -1 ? "dark" : (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.dataset.theme = t;
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Schibsted+Grotesk:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
 </head>
-<body>
-  <!-- Top Enterprise Header -->
-  <header class="topbar">
-    <div class="topbar-brand">
-      <div class="brand-mark">Q</div>
-      <div>
-        <div class="brand-title-row">
-          <span class="brand-name">QuickSpaces</span>
-          <span class="brand-pill">Amazon Quick Architecture</span>
-        </div>
-        <div class="brand-subtitle">Multi-Modal Enterprise Spaces &middot; Zero-Leakage Hybrid RAG &middot; Governance Agent</div>
-      </div>
-    </div>
-
-    <div class="topbar-controls">
-      <button type="button" class="ghost-btn" id="arch-btn" title="View AWS CloudFront + S3 + Bedrock Architecture">
-        &#9881; CloudFront + AWS Architecture
+<body id="top">
+  <!-- Signature ritwikareddykancharla.github.io Sticky Header -->
+  <header class="site">
+    <div class="bar">
+      <a class="brand" href="https://ritwikareddykancharla.github.io">
+        <span class="mark">RK</span>
+        <span class="name">Ritwika Kancharla</span>
+      </a>
+      <nav aria-label="Page">
+        <a href="#live-system" class="on">Live system</a>
+        <a href="#problem">Problem &amp; design</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#results">Benchmarks</a>
+        <a href="https://github.com/ritwikareddykancharla/quickspaces-ai">GitHub</a>
+      </nav>
+      <button class="theme" id="theme-toggle-btn" type="button" aria-label="Switch between light and dark theme">
+        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
       </button>
-      <button type="button" class="ghost-btn" id="reset-btn" title="Reset workspace demo state">
-        &#8635; Reset Demo
-      </button>
-      <div class="role-switcher-wrap">
-        <label for="role-select" class="role-label">Viewing As Role:</label>
-        <select id="role-select" class="role-select" aria-label="Select Governance Persona"></select>
-      </div>
+      <a class="btn contact" href="mailto:ritwikareddykancharla@gmail.com">Email</a>
     </div>
   </header>
 
-  <!-- Active Governance Clearance Banner -->
-  <div class="clearance-bar" id="clearance-bar">
-    <div class="clearance-left" id="clearance-summary">Loading governance context...</div>
-    <div class="clearance-right" id="runtime-telemetry">Connecting to backend...</div>
-  </div>
+  <main>
+    <article class="demo" style="--accent:#12737a">
+      <div class="wrap">
+        <a class="crumb" href="https://ritwikareddykancharla.github.io/#projects">&larr; All projects</a>
 
-  <!-- 3-Column Enterprise Workspace -->
-  <main class="workspace-grid">
-    <!-- Column 1: Spaces & Guided Actions -->
-    <aside class="sidebar">
-      <div class="panel-section">
-        <div class="section-heading">Enterprise Spaces</div>
-        <div id="spaces-list" class="spaces-list"></div>
-      </div>
-
-      <div class="panel-section tour-card">
-        <div class="section-heading">What To Try (1-Click Demo)</div>
-        <p class="tour-copy">Click any workflow below to see what QuickSpaces actually does live:</p>
-        <div class="tour-actions">
-          <button type="button" class="tour-btn" id="tour-ask-btn">
-            <strong>1. Cross-Modal AI Answer</strong>
-            <span>Synthesize CSV + Call Transcript + RFC via Amazon Bedrock</span>
-          </button>
-          <button type="button" class="tour-btn" id="tour-pii-btn">
-            <strong>2. Switch to NA Analyst (PII Mask)</strong>
-            <span>Watch spreadsheet emails &amp; phones mask dynamically</span>
-          </button>
-          <button type="button" class="tour-btn" id="tour-ext-btn">
-            <strong>3. Test External Contractor Block</strong>
-            <span>Prove confidential assets block BEFORE retrieval</span>
-          </button>
-          <button type="button" class="tour-btn" id="tour-gov-btn">
-            <strong>4. Run Governance Onboarding Agent</strong>
-            <span>Audit 5 enterprise rules &amp; auto-fix to 100/100</span>
-          </button>
-        </div>
-      </div>
-    </aside>
-
-    <!-- Column 2: Space Assets, Multi-Modal Viewer & Governance Tab -->
-    <section class="center-stage">
-      <div class="space-hero" id="space-hero">
-        <div>
-          <div class="space-dept" id="space-dept">Department</div>
-          <h1 class="space-title" id="space-title">Loading Space...</h1>
-          <p class="space-desc" id="space-desc"></p>
-        </div>
-        <div class="space-hero-actions">
-          <button type="button" class="primary-btn" id="open-ingest-btn">+ Ingest File / Asset</button>
-        </div>
-      </div>
-
-      <div class="stage-tabs">
-        <button type="button" class="stage-tab active" data-tab="assets" id="tab-btn-assets">
-          Space Assets &amp; Multi-Modal Viewer
-        </button>
-        <button type="button" class="stage-tab" data-tab="governance" id="tab-btn-governance">
-          Governance Onboarding Agent <span class="tab-badge" id="gov-tab-badge">0</span>
-        </button>
-      </div>
-
-      <!-- TAB 1: Space Assets + Search + Rich Multi-Modal Inspector -->
-      <div id="tab-panel-assets" class="tab-panel">
-        <div class="search-toolbar">
-          <input
-            type="search"
-            id="asset-search-input"
-            class="search-input"
-            placeholder="Hybrid BM25 + Semantic search across tables, transcripts, BI dashboards &amp; RFCs..."
-          />
-          <div class="filter-pills" id="modality-pills">
-            <button type="button" class="pill active" data-mod="all">All</button>
-            <button type="button" class="pill" data-mod="table">Tables (CSV)</button>
-            <button type="button" class="pill" data-mod="bi_dashboard">BI Dashboards</button>
-            <button type="button" class="pill" data-mod="transcript">Call Transcripts</button>
-            <button type="button" class="pill" data-mod="document">RFCs &amp; Docs</button>
-            <button type="button" class="pill" data-mod="favorites">&#9733; Favorites</button>
+        <header class="post-head">
+          <div class="head-text">
+            <p class="eyebrow">Amazon Quick Architecture &middot; Live CloudFront + Bedrock System</p>
+            <h1 class="post-title">QuickSpaces: Multi-Modal Enterprise Spaces, Zero-Leakage Hybrid RAG &amp; Governance</h1>
+            <p class="meta">
+              <span>Ritwika Kancharla</span>
+              <span>Amazon CloudFront + Private S3 (OAC) + Bedrock Nova</span>
+              <span>us-west-2</span>
+              <span><a href="https://github.com/ritwikareddykancharla/quickspaces-ai">Repository (GitHub)</a></span>
+            </p>
           </div>
+
+          <div class="stats">
+            <div class="stat-cell">
+              <b>90.0% Top-3</b>
+              <span>Hybrid BM25 + semantic n-gram RRF asset recall (0.67 ms p50)</span>
+            </div>
+            <div class="stat-cell">
+              <b>100% ACL Block</b>
+              <span>Zero-leakage clearance &amp; region pre-filter before retrieval</span>
+            </div>
+            <div class="stat-cell">
+              <b>100% Verified</b>
+              <span>Cross-modal inline [C1..C5] span &amp; numeric grounding precision</span>
+            </div>
+            <div class="stat-cell">
+              <b>45 &rarr; 100/100</b>
+              <span>5-rule Enterprise Governance Onboarding Agent with SHA-256 receipts</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="tldr">
+          <p class="tk">Abstract</p>
+          <p>Enterprise teams split operational truth across CSV cohort tables, BI KPI dashboards, recorded escalation calls, and engineering RFCs. Standard flat-text RAG pipelines strip spreadsheet schemas, lose speaker timestamps, and risk leaking confidential or cross-region spans when access control runs as an afterthought.</p>
+          <p><strong>QuickSpaces</strong> implements the platform layer of an agentic enterprise workspace modeled on <em>Amazon Quick Core Experience</em>, <em>Quick Spaces</em>, and <em>AWS Quick RAG</em>: modality-aware ingestion (scanning PII columns on write), strict tenant/region/clearance ACL pre-filtering prior to hybrid BM25 + vector scoring, cross-modal synthesis via <strong>Amazon Bedrock (<code>us.amazon.nova-lite-v1:0</code>)</strong> with auto-generated BI charts, and an autonomous <strong>Governance Onboarding Agent</strong> that audits and remediates account misconfigurations in one click.</p>
         </div>
 
-        <div id="search-results-banner" class="search-banner hidden"></div>
+        <!-- 01 LIVE INTERACTIVE WORKSPACE -->
+        <section class="sec-block" id="live-system">
+          <div class="sec-title-row">
+            <h2><span class="num">01</span>Live Interactive Workspace</h2>
+            <div class="ws-top-actions">
+              <button type="button" class="btn" id="open-ingest-btn">+ Ingest File / Asset</button>
+              <button type="button" class="btn" id="reset-btn">&#8635; Reset State</button>
+              <div class="role-box">
+                <label for="role-select">VIEWING AS:</label>
+                <select id="role-select" aria-label="Select Governance Persona"></select>
+              </div>
+            </div>
+          </div>
 
-        <div class="assets-strip" id="assets-list"></div>
+          <!-- Signature Architectural Plate with Corner Ticks -->
+          <div class="plate ws-plate">
+            <!-- Active Clearance Strip -->
+            <div class="clearance-bar" id="clearance-bar">
+              <div id="clearance-summary">Loading governance policy...</div>
+              <div class="mono-dim" id="runtime-telemetry">Connecting...</div>
+            </div>
 
-        <!-- Rich Multi-Modal Asset Inspector -->
-        <div class="inspector-card" id="asset-inspector">
-          <div class="inspector-empty">Select any asset above (or click a citation in Ask Quick AI) to inspect its contents.</div>
-        </div>
+            <!-- 1-Click Guided Workflows Strip -->
+            <div class="guided-strip">
+              <span class="guided-k">1-CLICK WORKFLOWS:</span>
+              <button type="button" class="chip-btn" id="tour-ask-btn">01 Cross-Modal Bedrock Answer (CSV + Call + RFC)</button>
+              <button type="button" class="chip-btn" id="tour-pii-btn">02 Switch to NA Analyst (Mask PII Columns)</button>
+              <button type="button" class="chip-btn" id="tour-ext-btn">03 External Contractor Pre-Filter Block</button>
+              <button type="button" class="chip-btn" id="tour-gov-btn">04 Run Governance Agent (45 &rarr; 100/100)</button>
+            </div>
+
+            <!-- 3-Column Interactive Workspace Grid -->
+            <div class="ws-grid">
+              <!-- Col 1: Enterprise Spaces -->
+              <aside class="ws-col-spaces">
+                <p class="panel-k">Enterprise Spaces</p>
+                <div id="spaces-list" class="spaces-list"></div>
+              </aside>
+
+              <!-- Col 2: Space Assets, Multi-Modal Inspector & Governance Agent -->
+              <div class="ws-col-main">
+                <div class="space-banner">
+                  <div>
+                    <p class="panel-k" id="space-dept">DEPARTMENT</p>
+                    <h3 class="space-h3" id="space-title">Loading Space...</h3>
+                    <p class="space-lede" id="space-desc"></p>
+                  </div>
+                </div>
+
+                <div class="ws-tabs">
+                  <button type="button" class="ws-tab active" id="tab-btn-assets">
+                    Space Assets &amp; Multi-Modal Inspector
+                  </button>
+                  <button type="button" class="ws-tab" id="tab-btn-governance">
+                    Governance Onboarding Agent <span class="st" id="gov-tab-badge">0</span>
+                  </button>
+                </div>
+
+                <!-- Panel A: Assets & Multi-Modal Viewer -->
+                <div id="tab-panel-assets" class="ws-panel">
+                  <div class="search-row">
+                    <input
+                      type="search"
+                      id="asset-search-input"
+                      class="ws-input"
+                      placeholder="Search Space via BM25 + semantic n-gram RRF (e.g. NordBank, SCIM, jam rate, KMS)..."
+                    />
+                    <div class="mod-filters" id="modality-pills">
+                      <button type="button" class="chip-btn active" data-mod="all">All</button>
+                      <button type="button" class="chip-btn" data-mod="table">Tables</button>
+                      <button type="button" class="chip-btn" data-mod="bi_dashboard">BI KPIs</button>
+                      <button type="button" class="chip-btn" data-mod="transcript">Transcripts</button>
+                      <button type="button" class="chip-btn" data-mod="document">RFCs</button>
+                      <button type="button" class="chip-btn" data-mod="favorites">&#9733; Starred</button>
+                    </div>
+                  </div>
+
+                  <div id="search-results-banner" class="note-inline hidden"></div>
+                  <div class="assets-strip" id="assets-list"></div>
+
+                  <div class="inspector-box" id="asset-inspector">
+                    <p class="mono-dim">Select an asset above (or click any [C#] citation on the right) to inspect.</p>
+                  </div>
+                </div>
+
+                <!-- Panel B: Governance Agent -->
+                <div id="tab-panel-governance" class="ws-panel hidden">
+                  <div id="governance-container"></div>
+                </div>
+              </div>
+
+              <!-- Col 3: Ask Quick AI Copilot -->
+              <aside class="ws-col-ai">
+                <div class="ai-head">
+                  <div>
+                    <p class="panel-k">Space-Grounded Copilot</p>
+                    <h3 class="ai-h3">Ask Quick AI</h3>
+                  </div>
+                  <span class="st st-prog">Bedrock Nova</span>
+                </div>
+
+                <div class="sug-wrap">
+                  <p class="panel-k">Prompts grounded in this Space</p>
+                  <div id="suggested-questions" class="sug-list"></div>
+                </div>
+
+                <div class="chat-feed" id="chat-feed">
+                  <div class="chat-empty">
+                    Query across tables, BI KPIs, call transcripts, and RFCs in this Space. Unauthorized assets are filtered out before scoring.
+                  </div>
+                </div>
+
+                <form class="chat-form" id="chat-form">
+                  <textarea
+                    id="chat-input"
+                    rows="2"
+                    placeholder="Ask a question grounded in this Space..."
+                    required
+                  ></textarea>
+                  <button type="submit" class="btn primary" id="chat-submit-btn">Run Grounded Query &rarr;</button>
+                </form>
+              </aside>
+            </div>
+          </div>
+          <figcaption><b>Figure 1.</b> Live QuickSpaces instance served from Amazon CloudFront + Private S3 (OAC) with dynamic <code>/api/*</code> execution in <code>us-west-2</code> on Amazon Bedrock (<code>us.amazon.nova-lite-v1:0</code>).</figcaption>
+        </section>
+
+        <!-- 02 PROBLEM STATEMENT & DESIGN -->
+        <section class="sec-block" id="problem">
+          <h2><span class="num">02</span>Problem Statement &amp; Subsystem Design</h2>
+          <p class="prose">An enterprise digital workspace has to solve four coupled systems problems simultaneously: unifying writes from heterogeneous producer pipelines (Snowflake CSV syncs, QuickSight metric publishers, Chime call transcripts, Git RFCs), preserving modality-native structure during chunking, guaranteeing zero cross-clearance leakage during retrieval, and continuously auditing account-level governance drift.</p>
+
+          <div class="tablewrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Subsystem</th>
+                  <th>Amazon Quick Surface</th>
+                  <th>Engineering Mechanism Implemented</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Spaces &amp; Asset Metadata</strong></td>
+                  <td>Quick Core Experience &amp; Quick Spaces</td>
+                  <td>Multi-tenant Space catalog indexing files, favorites, producer lineage, clearance tiers (<code>PUBLIC</code>, <code>INTERNAL</code>, <code>CONFIDENTIAL</code>), and regional residency tags.</td>
+                </tr>
+                <tr>
+                  <td><strong>Multi-Modal Ingestion</strong></td>
+                  <td>AWS Quick RAG Pipeline</td>
+                  <td>Typed CSV parser (computing column rollups + regex/header PII column detection), <code>[MM:SS]</code> speaker-turn VTT parser, BI KPI series extractor, and heading-anchored RFC splitter.</td>
+                </tr>
+                <tr>
+                  <td><strong>Zero-Leakage Hybrid Search</strong></td>
+                  <td>AWS Quick Information Retrieval</td>
+                  <td>Pre-filters assets against caller clearance &amp; region <em>prior</em> to Okapi BM25 + 4-gram cosine Reciprocal Rank Fusion (<code>k=20</code>) and asset-level max-pooling.</td>
+                </tr>
+                <tr>
+                  <td><strong>Governance Onboarding Agent</strong></td>
+                  <td>Enterprise Account Governance</td>
+                  <td>Evaluates 5 controls (<code>GOV-PII-01</code>..<code>GOV-RET-05</code>), enforces dynamic PII masking for non-Admin viewers, and emits SHA-256 hash-chained remediation receipts.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 03 SYSTEM ARCHITECTURE (Signature Blueprint Loop SVG) -->
+        <section class="sec-block" id="architecture">
+          <h2><span class="num">03</span>CloudFront &amp; Zero-Leakage Retrieval Loop</h2>
+          <figure class="fig">
+            <div class="plate">
+              <svg class="loop" viewBox="0 0 880 330" role="img" aria-label="QuickSpaces CloudFront and Multi-Modal RAG control loop">
+                <defs>
+                  <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M0 0L10 5L0 10z" class="lp-ah"/>
+                  </marker>
+                  <marker id="ahd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M0 0L10 5L0 10z" class="lp-ahd"/>
+                  </marker>
+                </defs>
+                <g class="lp-h">
+                  <rect x="20" y="42" width="240" height="78"/>
+                  <text class="lp-n" x="36" y="64">01  edge delivery</text>
+                  <text class="lp-t" x="36" y="88">CloudFront + S3 (OAC)</text>
+                  <text class="lp-s" x="36" y="106">static SPA (*), dynamic /api/*</text>
+                </g>
+                <g class="lp-h">
+                  <rect x="320" y="42" width="240" height="78"/>
+                  <text class="lp-n" x="336" y="64">02  ingest &amp; scan</text>
+                  <text class="lp-t" x="336" y="88">Multi-Modal Parsers</text>
+                  <text class="lp-s" x="336" y="106">CSV PII scan, VTT [MM:SS], BI, MD</text>
+                </g>
+                <g class="lp-x">
+                  <rect x="620" y="42" width="240" height="78"/>
+                  <text class="lp-n" x="636" y="64">03  policy gate</text>
+                  <text class="lp-t" x="636" y="88">ACL Pre-Filter</text>
+                  <text class="lp-s" x="636" y="106">tenant, region &amp; clearance check</text>
+                </g>
+                <g class="lp-h">
+                  <rect x="620" y="210" width="240" height="78"/>
+                  <text class="lp-n" x="636" y="232">04  retrieval</text>
+                  <text class="lp-t" x="636" y="256">BM25 + Cosine RRF</text>
+                  <text class="lp-s" x="636" y="274">cross-modal promotion + BI chart</text>
+                </g>
+                <g class="lp-m">
+                  <rect x="320" y="210" width="240" height="78"/>
+                  <text class="lp-n" x="336" y="232">05  bedrock nova</text>
+                  <text class="lp-t" x="336" y="256">Grounded Synthesis</text>
+                  <text class="lp-s" x="336" y="274">us.amazon.nova-lite-v1:0 [C1..C5]</text>
+                </g>
+                <g class="lp-h">
+                  <rect x="20" y="210" width="240" height="78"/>
+                  <text class="lp-n" x="36" y="232">06  verification</text>
+                  <text class="lp-t" x="36" y="256">Span &amp; Gov Audit</text>
+                  <text class="lp-s" x="36" y="274">numeric check + SHA-256 receipt</text>
+                </g>
+                <g class="lp-a">
+                  <path d="M260 81H318" marker-end="url(#ah)"/>
+                  <path d="M560 81H618" marker-end="url(#ah)"/>
+                  <path d="M740 120V208" marker-end="url(#ah)"/>
+                  <path d="M620 249H562" marker-end="url(#ah)"/>
+                  <path d="M320 249H262" marker-end="url(#ah)"/>
+                </g>
+                <g class="lp-d">
+                  <path d="M740 42C740 8 440 8 440 40" marker-end="url(#ahd)"/>
+                </g>
+                <text class="lp-l" x="590" y="16" text-anchor="middle">governance agent: enforces PII masking, KMS residency &amp; revokes guest shares</text>
+              </svg>
+            </div>
+            <figcaption><b>Figure 2.</b> Control loop across edge delivery, multi-modal indexing, pre-retrieval ACL gating, hybrid RRF ranking, and Amazon Bedrock Nova citation verification.</figcaption>
+          </figure>
+        </section>
+
+        <!-- 04 MEASURED BENCHMARKS -->
+        <section class="sec-block" id="results">
+          <h2><span class="num">04</span>Measured Benchmark Results</h2>
+          <div class="tablewrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Evaluation Dimension</th>
+                  <th>Baseline / Before</th>
+                  <th class="r">QuickSpaces Measured</th>
+                  <th>Protocol (<code>benchmarks/run_benchmarks.py</code>)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Hybrid Top-3 Asset Recall</td>
+                  <td>80.0% (chunk-only ranking)</td>
+                  <td class="r"><strong>90.0%</strong></td>
+                  <td>10 multi-modal queries across 3 enterprise Spaces with asset max-pooling</td>
+                </tr>
+                <tr class="best">
+                  <td>Zero-Leakage ACL Pre-Filter</td>
+                  <td>Post-hoc prompt instruction</td>
+                  <td class="r"><strong>100.0% blocked</strong></td>
+                  <td>5 adversarial contractor &amp; regional boundary probes (0 unauthorized spans)</td>
+                </tr>
+                <tr>
+                  <td>Citation Span Verification</td>
+                  <td>Unchecked inline brackets</td>
+                  <td class="r"><strong>100.0% precision</strong></td>
+                  <td>Deterministic span &amp; numeric token verifier over retrieved chunks</td>
+                </tr>
+                <tr>
+                  <td>Hybrid RRF Retrieval Latency</td>
+                  <td>&mdash;</td>
+                  <td class="r"><strong>0.67 ms p50 / 1.15 ms p95</strong></td>
+                  <td>In-memory BM25 + 4-gram cosine RRF over chunked enterprise corpus</td>
+                </tr>
+                <tr>
+                  <td>Governance Readiness Lift</td>
+                  <td>59.7 / 100 mean readiness</td>
+                  <td class="r"><strong>100.0 / 100</strong></td>
+                  <td>Automated remediation across 5 enterprise controls + SHA-256 receipt</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
       </div>
-
-      <!-- TAB 2: Enterprise Governance Onboarding & Evaluation Agent -->
-      <div id="tab-panel-governance" class="tab-panel hidden">
-        <div id="governance-container"></div>
-      </div>
-    </section>
-
-    <!-- Column 3: Space-Grounded Research & BI Copilot -->
-    <aside class="copilot-panel">
-      <div class="copilot-header">
-        <div>
-          <div class="copilot-title">Ask Quick AI</div>
-          <div class="copilot-sub">Grounded in authorized Space assets &middot; Auto BI Charts</div>
-        </div>
-        <span class="bedrock-badge">Bedrock Nova</span>
-      </div>
-
-      <div class="suggested-box">
-        <div class="section-heading">Suggested Space Questions</div>
-        <div id="suggested-questions" class="suggested-list"></div>
-      </div>
-
-      <div class="chat-feed" id="chat-feed">
-        <div class="chat-welcome">
-          Ask any question about the active Space, or click a suggested question above. Every claim is verified against authorized tables, BI metrics, call transcripts, and RFCs — and restricted files are filtered out <strong>before</strong> retrieval.
-        </div>
-      </div>
-
-      <form class="chat-composer" id="chat-form">
-        <textarea
-          id="chat-input"
-          rows="2"
-          placeholder="Ask across tables, transcripts, BI dashboards &amp; docs in this Space..."
-          required
-        ></textarea>
-        <button type="submit" class="primary-btn" id="chat-submit-btn">Ask Space AI &rarr;</button>
-      </form>
-    </aside>
+    </article>
   </main>
 
-  <!-- Modal 1: Live Multi-Modal File / Asset Ingestion -->
+  <footer class="site-foot">
+    <div class="wrap">
+      <span>Ritwika Kancharla, 2026 &middot; QuickSpaces on Amazon CloudFront + S3 (OAC) + Bedrock</span>
+      <span>
+        <a href="https://ritwikareddykancharla.github.io">Portfolio</a> &nbsp;
+        <a href="https://github.com/ritwikareddykancharla/quickspaces-ai">GitHub</a> &nbsp;
+        <a href="mailto:ritwikareddykancharla@gmail.com">Email</a>
+      </span>
+    </div>
+  </footer>
+
+  <!-- Modal: Live Multi-Modal Asset Ingestion -->
   <div class="modal-backdrop hidden" id="ingest-modal">
-    <div class="modal-card">
+    <div class="plate modal-plate">
       <div class="modal-header">
         <div>
-          <h2>Ingest New Asset into Space</h2>
-          <p>Drop a local <code>.csv</code>, <code>.md</code>, or <code>.vtt</code> file — or load a 1-click sample — to run multi-modal parsing, automatic PII column detection, and hybrid indexing live.</p>
+          <p class="tk">Multi-Modal Ingestion Pipeline</p>
+          <h3>Ingest New Asset into Space</h3>
+          <p class="modal-sub">Upload a local <code>.csv</code>, <code>.vtt</code>, or <code>.md</code> file — or load a 1-click sample — to run schema extraction, PII column scanning, and hybrid indexing live.</p>
         </div>
-        <button type="button" class="close-btn" id="close-ingest-btn">&times;</button>
+        <button type="button" class="btn" id="close-ingest-btn">&times;</button>
       </div>
 
       <div class="sample-bar">
-        <span>Quick load sample:</span>
-        <button type="button" class="pill" id="sample-csv-btn">Sample GPU Cost CSV (with PII email)</button>
-        <button type="button" class="pill" id="sample-vtt-btn">Sample Customer Call Transcript (.vtt)</button>
-        <label class="pill file-upload-pill">
-          &#128194; Choose Local File
+        <span class="mono-dim">LOAD SAMPLE:</span>
+        <button type="button" class="chip-btn" id="sample-csv-btn">Q4 GPU Cost CSV (with PII email)</button>
+        <button type="button" class="chip-btn" id="sample-vtt-btn">Customer Advisory Transcript (.vtt)</button>
+        <label class="chip-btn file-label">
+          Choose Local File
           <input type="file" id="local-file-input" accept=".csv,.md,.txt,.vtt" hidden />
         </label>
       </div>
 
       <form id="ingest-form" class="ingest-form">
-        <div class="form-row-2">
+        <div class="form-grid-2">
           <div>
-            <label>Asset Title</label>
-            <input type="text" id="ing-title" required placeholder="e.g. Q4 Bedrock &amp; GPU Inference Spend" />
+            <label>ASSET TITLE</label>
+            <input type="text" id="ing-title" class="ws-input" required placeholder="e.g. Q4 Bedrock &amp; GPU Spend" />
           </div>
           <div>
-            <label>Filename</label>
-            <input type="text" id="ing-filename" required placeholder="e.g. q4_gpu_spend.csv" />
+            <label>FILENAME</label>
+            <input type="text" id="ing-filename" class="ws-input" required placeholder="e.g. q4_gpu_spend.csv" />
           </div>
         </div>
-        <div class="form-row-3">
+        <div class="form-grid-3">
           <div>
-            <label>Modality Parser</label>
-            <select id="ing-modality">
+            <label>MODALITY PARSER</label>
+            <select id="ing-modality" class="ws-input">
               <option value="table">Table / Spreadsheet (CSV)</option>
               <option value="transcript">Call Transcript ([MM:SS] VTT)</option>
               <option value="document">Document / RFC (Markdown)</option>
             </select>
           </div>
           <div>
-            <label>Classification</label>
-            <select id="ing-classification">
+            <label>CLASSIFICATION</label>
+            <select id="ing-classification" class="ws-input">
               <option value="INTERNAL">INTERNAL</option>
               <option value="CONFIDENTIAL">CONFIDENTIAL</option>
               <option value="PUBLIC">PUBLIC</option>
             </select>
           </div>
           <div>
-            <label>Allowed Regions</label>
-            <select id="ing-regions">
+            <label>REGIONS</label>
+            <select id="ing-regions" class="ws-input">
               <option value="NA,EMEA">NA + EMEA</option>
               <option value="NA">NA Only</option>
               <option value="EMEA">EMEA Only</option>
@@ -223,30 +442,14 @@
           </div>
         </div>
         <div>
-          <label>Raw Content (CSV rows, `[MM:SS] Speaker: text`, or Markdown)</label>
-          <textarea id="ing-content" rows="7" required placeholder="Paste CSV, transcript, or markdown content..."></textarea>
+          <label>RAW CONTENT</label>
+          <textarea id="ing-content" class="ws-input" rows="6" required placeholder="Paste CSV rows, [MM:SS] Speaker: text, or Markdown..."></textarea>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="ghost-btn" id="cancel-ingest-btn">Cancel</button>
-          <button type="submit" class="primary-btn" id="submit-ingest-btn">Parse, Scan PII &amp; Index into Space</button>
+        <div class="modal-foot">
+          <button type="button" class="btn" id="cancel-ingest-btn">Cancel</button>
+          <button type="submit" class="btn primary" id="submit-ingest-btn">Parse, Scan PII &amp; Index &rarr;</button>
         </div>
       </form>
-    </div>
-  </div>
-
-  <!-- Modal 2: AWS CloudFront + S3 + Bedrock Architecture Diagram -->
-  <div class="modal-backdrop hidden" id="arch-modal">
-    <div class="modal-card modal-wide">
-      <div class="modal-header">
-        <div>
-          <h2>Production AWS CloudFront + Multi-Modal RAG Architecture</h2>
-          <p>Static web assets served globally via <strong>Amazon CloudFront + Private S3 (OAC)</strong>; dynamic <code>/api/*</code> behaviors routed on the same domain to the Python workspace engine + <strong>Amazon Bedrock Nova</strong>.</p>
-        </div>
-        <button type="button" class="close-btn" id="close-arch-btn">&times;</button>
-      </div>
-      <div class="arch-body">
-        <img src="/architecture.svg" alt="QuickSpaces AWS CloudFront Architecture" class="arch-img" />
-      </div>
     </div>
   </div>
 

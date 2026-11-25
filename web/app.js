@@ -1,4 +1,4 @@
-/* QuickSpaces Interactive Enterprise Workspace Frontend (CloudFront + S3 Static Origin) */
+/* QuickSpaces Interactive Enterprise Workspace Frontend — ritwikareddykancharla.github.io Blueprint Edition */
 (function () {
   "use strict";
 
@@ -24,9 +24,9 @@
 
   function modLabel(mod) {
     if (mod === "table") return "CSV Table";
-    if (mod === "bi_dashboard") return "BI Dashboard";
+    if (mod === "bi_dashboard") return "BI KPIs";
     if (mod === "transcript") return "Transcript";
-    return "Document";
+    return "RFC / Doc";
   }
 
   async function apiGet(path) {
@@ -60,16 +60,13 @@
         : "");
 
     document.getElementById("clearance-summary").innerHTML =
-      "<strong>Active Governance Policy:</strong> " +
-      esc(p.display_name) +
-      " &mdash; " +
-      esc(p.title);
+      "<strong>ACTIVE POLICY:</strong> " + esc(p.display_name) + " &mdash; " + esc(p.title);
 
     const originKind = location.hostname.includes("cloudfront.net")
-      ? "Amazon CloudFront + S3 (OAC) + /api/*"
-      : "Local Dev Server -> Live AWS Bedrock";
+      ? "CloudFront + S3 (OAC) + /api/*"
+      : "Local Dev -> Live AWS Bedrock";
     document.getElementById("runtime-telemetry").textContent =
-      originKind + " · Tenant: " + p.tenant_id;
+      originKind + " · tenant=" + p.tenant_id;
   }
 
   function renderRoleSelector() {
@@ -93,18 +90,14 @@
     box.innerHTML = snap.spaces
       .map((sp) => {
         const active = sp.space_id === state.spaceId ? "active" : "";
-        const scoreColor =
-          sp.readiness_score >= 90
-            ? "color:var(--ok);font-weight:700;"
-            : "color:var(--warn);font-weight:700;";
+        const scoreStyle =
+          sp.readiness_score >= 90 ? "color:var(--ok);font-weight:600;" : "color:var(--signal);font-weight:600;";
         return `
           <button type="button" class="space-item ${active}" data-space="${esc(sp.space_id)}">
-            <div class="space-item-top">
-              <span>${esc(sp.name)}</span>
-            </div>
+            <div class="space-item-top">${esc(sp.name)}</div>
             <div class="space-item-meta">
-              <span>${sp.accessible_count}/${sp.asset_count} accessible</span>
-              <span style="${scoreColor}">Gov ${sp.readiness_score}/100</span>
+              <span>${sp.accessible_count}/${sp.asset_count} open</span>
+              <span style="${scoreStyle}">Gov ${sp.readiness_score}/100</span>
             </div>
           </button>
         `;
@@ -135,24 +128,18 @@
     const badge = document.getElementById("gov-tab-badge");
     if (gov.open_findings_count === 0) {
       badge.textContent = "100/100 Ready";
-      badge.className = "tab-badge ok";
+      badge.className = "st st-done";
     } else {
       badge.textContent = gov.open_findings_count + " open";
-      badge.className = "tab-badge";
+      badge.className = "st st-prog";
     }
 
-    // Suggested questions in right panel
     const sqBox = document.getElementById("suggested-questions");
     sqBox.innerHTML = (sp.suggested_questions || [])
-      .map(
-        (q) =>
-          `<button type="button" class="sug-btn" data-q="${esc(q)}">${esc(q)}</button>`
-      )
+      .map((q) => `<button type="button" class="sug-btn" data-q="${esc(q)}">${esc(q)}</button>`)
       .join("");
     sqBox.querySelectorAll(".sug-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        askQuestion(btn.getAttribute("data-q"));
-      });
+      btn.addEventListener("click", () => askQuestion(btn.getAttribute("data-q")));
     });
   }
 
@@ -184,12 +171,10 @@
       banner.classList.remove("hidden");
       const blockedCount = (state.searchHits.blocked_assets || []).length;
       banner.innerHTML = `
-        <span><strong>Hybrid RRF Search:</strong> ${state.searchHits.hits.length} authorized asset(s) matched "${esc(state.searchQuery)}" ${
-        blockedCount > 0
-          ? `&middot; <strong>${blockedCount} restricted asset(s) pre-filtered out for role</strong>`
-          : ""
+        <span><strong>HYBRID RRF:</strong> ${state.searchHits.hits.length} authorized hit(s) for "${esc(state.searchQuery)}"${
+        blockedCount > 0 ? ` &middot; <strong>${blockedCount} restricted asset(s) pre-filtered out</strong>` : ""
       }</span>
-        <button type="button" class="pill" id="clear-search-btn">Clear Search</button>
+        <button type="button" class="chip-btn" id="clear-search-btn">Clear</button>
       `;
       document.getElementById("clear-search-btn").onclick = () => {
         state.searchQuery = "";
@@ -202,7 +187,7 @@
     }
 
     if (!list.length) {
-      strip.innerHTML = `<div style="grid-column:1/-1;color:var(--ink-muted);padding:10px;">No assets match this filter for your active governance clearance.</div>`;
+      strip.innerHTML = `<div class="mono-dim" style="grid-column:1/-1;padding:10px 0;">0 assets match this filter for your active governance clearance.</div>`;
       return;
     }
 
@@ -226,20 +211,18 @@
         return `
           <div class="asset-card ${selected} ${locked}" data-asset="${esc(a.asset_id)}">
             <div class="asset-card-head">
-              <span class="mod-tag mod-${esc(a.modality)}">${esc(modLabel(a.modality))}</span>
-              <button type="button" class="fav-star ${a.favorite ? "active" : ""}" data-fav="${esc(a.asset_id)}" title="Toggle Space Favorite">&#9733;</button>
+              <span class="st">${esc(modLabel(a.modality))}</span>
+              <button type="button" class="fav-star ${a.favorite ? "active" : ""}" data-fav="${esc(a.asset_id)}" title="Star asset">&#9733;</button>
             </div>
-            <div class="asset-card-title">
-              ${!a.access_allowed ? "&#128274; " : ""}${esc(a.title)}
-            </div>
+            <div class="asset-card-title">${!a.access_allowed ? "[LOCKED] " : ""}${esc(a.title)}</div>
             ${
               sh
-                ? `<div class="mono" style="font-size:10.5px;color:var(--accent);">RRF ${sh.rrf_score} (BM25 ${sh.bm25_score} · Sem ${sh.semantic_score})</div>`
-                : `<div style="font-size:11px;color:var(--ink-muted);">${esc(a.filename)}</div>`
+                ? `<div class="mono-dim" style="color:var(--cobalt);">RRF ${sh.rrf_score} (BM25 ${sh.bm25_score})</div>`
+                : `<div class="mono-dim">${esc(a.filename)}</div>`
             }
             <div class="asset-card-foot">
-              <span class="cls-badge cls-${esc(a.classification)}">${esc(a.classification)}</span>
-              <span>${esc(a.regions.join(", "))} &middot; ${a.chunk_count} chunks</span>
+              <span class="st cls-${esc(a.classification)}">${esc(a.classification)}</span>
+              <span>${esc(a.regions.join(","))} &middot; ${a.chunk_count}c</span>
             </div>
           </div>
         `;
@@ -270,17 +253,17 @@
     const maxAbs = Math.max(...points.map((p) => Math.abs(Number(p.value) || 0)), 1);
     return `
       <div class="bar-chart-card">
-        <div style="font-weight:700;font-size:12.5px;margin-bottom:8px;">${esc(title)}</div>
+        <div class="panel-k" style="color:var(--ink);margin-bottom:8px;">${esc(title)}</div>
         ${points
           .map((pt) => {
             const val = Number(pt.value) || 0;
-            const pct = Math.max(4, Math.round((Math.abs(val) / maxAbs) * 100));
+            const pct = Math.max(3, Math.round((Math.abs(val) / maxAbs) * 100));
             const neg = val < 0 ? "negative" : "";
             return `
               <div class="bar-row">
-                <span style="font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${esc(pt.label)}">${esc(pt.label)}</span>
+                <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${esc(pt.label)}">${esc(pt.label)}</span>
                 <div class="bar-track"><div class="bar-fill ${neg}" style="width:${pct}%"></div></div>
-                <span class="mono" style="text-align:right;font-weight:700;">${esc(val)}${esc(unit || "")}</span>
+                <span style="text-align:right;color:var(--ink);font-weight:600;">${esc(val)}${esc(unit || "")}</span>
               </div>
             `;
           })
@@ -292,7 +275,7 @@
   async function loadAssetInspector(assetId, flashHighlight) {
     const box = document.getElementById("asset-inspector");
     if (!assetId) return;
-    box.innerHTML = `<div style="color:var(--ink-muted);">Loading multi-modal inspector...</div>`;
+    box.innerHTML = `<div class="mono-dim">Loading multi-modal inspector...</div>`;
 
     try {
       const detail = await apiGet(
@@ -303,15 +286,12 @@
       if (detail.blocked) {
         box.innerHTML = `
           <div class="inspector-head">
-            <div>
-              <span class="cls-badge cls-${esc(a.classification)}">${esc(a.classification)}</span>
-              <h3 class="inspector-title">&#128274; ${esc(a.title)}</h3>
-              <div class="inspector-meta">${esc(a.filename)} &middot; Regions: ${esc(a.regions.join(", "))}</div>
-            </div>
+            <span class="st cls-${esc(a.classification)}">${esc(a.classification)}</span>
+            <h4 class="inspector-title">[ACCESS DENIED] ${esc(a.title)}</h4>
+            <div class="mono-dim">${esc(a.filename)} &middot; Regions: ${esc(a.regions.join(", "))}</div>
           </div>
-          <div style="background:var(--danger-soft);border:1px solid #fecaca;color:#991b1b;padding:12px;border-radius:8px;">
-            <strong>Blocked by Quick Enterprise Governance Pre-Filter:</strong> ${esc(detail.block_reason)}.
-            <div style="margin-top:6px;font-size:12px;">Switch <strong>Viewing As Role</strong> in the top-right header to <em>VP Engineering (Admin)</em> to inspect this asset.</div>
+          <div class="pii-banner masked">
+            <span><strong>ACL PRE-FILTER BLOCKED:</strong> ${esc(detail.block_reason)}. Switch <em>VIEWING AS</em> in the section header to <strong>VP Engineering (Admin)</strong> to inspect this file.</span>
           </div>
         `;
         return;
@@ -325,18 +305,18 @@
         const piiNotice = piiCols.size
           ? detail.pii_masked_for_caller
             ? `<div class="pii-banner masked">
-                 <span>&#128737; <strong>Dynamic PII Masking Active:</strong> Columns <code>${esc(
+                 <span><strong>DYNAMIC PII MASKING ACTIVE:</strong> Columns <code>${esc(
                    Array.from(piiCols).join(", ")
-                 )}</code> are masked for role <strong>${esc(state.snapshot.principal.display_name)}</strong>.</span>
-                 <span>Switch to VP Admin to view raw PII</span>
+                 )}</code> masked for <strong>${esc(state.snapshot.principal.display_name)}</strong>.</span>
+                 <span>Switch to VP Admin for raw PII</span>
                </div>`
-            : `<div class="pii-banner raw">
-                 <span>&#128065; <strong>Raw PII Visible (Admin Clearance):</strong> Columns <code>${esc(
+            : `<div class="pii-banner">
+                 <span><strong>ADMIN RAW PII CLEARANCE:</strong> Detected PII columns <code>${esc(
                    Array.from(piiCols).join(", ")
-                 )}</code> detected by ingestion scanner. ${
+                 )}</code>. ${
                 a.pii_masking_enforced
-                  ? "Policy status: Masked for non-admins."
-                  : "Warning: Default column policy not yet locked (see Governance Agent)."
+                  ? "Default non-admin policy: MASKED."
+                  : "Warning: Default column policy unlocked (see Governance Agent)."
               }</span>
                </div>`
           : "";
@@ -348,9 +328,9 @@
                  .map(
                    ([col, st]) => `
                  <div class="kpi-box">
-                   <div class="kpi-box-label">Column: <code>${esc(col)}</code></div>
+                   <div class="kpi-box-label">${esc(col)}</div>
                    <div class="kpi-box-val">${esc(st.sum.toLocaleString())}</div>
-                   <div class="kpi-box-delta">Avg ${esc(st.avg.toLocaleString())} &middot; Min ${esc(st.min)} / Max ${esc(st.max)}</div>
+                   <div class="kpi-box-delta">avg ${esc(st.avg.toLocaleString())} &middot; [${esc(st.min)}, ${esc(st.max)}]</div>
                  </div>`
                  )
                  .join("")}
@@ -360,19 +340,12 @@
         bodyHtml = `
           ${piiNotice}
           ${rollupHtml}
-          <div class="table-scroll">
-            <table class="data-table">
+          <div class="tablewrap">
+            <table>
               <thead>
                 <tr>
                   ${(p.headers || [])
-                    .map(
-                      (h) =>
-                        `<th>${esc(h)} ${
-                          piiCols.has(h)
-                            ? `<span class="cls-badge cls-CONFIDENTIAL">PII</span>`
-                            : ""
-                        }</th>`
-                    )
+                    .map((h) => `<th>${esc(h)}${piiCols.has(h) ? " [PII]" : ""}</th>`)
                     .join("")}
                 </tr>
               </thead>
@@ -409,9 +382,9 @@
               .join("")}
           </div>
           ${renderBarChartHtml(p.chart_title || a.title, p.series || [], p.unit || "")}
-          <div style="margin-top:10px;background:#fff;border:1px solid var(--border);border-radius:8px;padding:9px 11px;font-size:12px;">
-            <div><strong>Anomaly Insight:</strong> ${esc(p.anomaly_note || "")}</div>
-            <div style="margin-top:5px;color:var(--ink-muted);"><strong>Warehouse SQL Lineage:</strong> <code>${esc(p.sql_lineage || "")}</code></div>
+          <div class="doc-sec" style="margin-top:12px;">
+            <p><strong>Anomaly Callout:</strong> ${esc(p.anomaly_note || "")}</p>
+            <div class="mono-dim" style="margin-top:6px;">SQL Lineage: <code>${esc(p.sql_lineage || "")}</code></div>
           </div>
         `;
       } else if (a.modality === "transcript") {
@@ -423,9 +396,9 @@
               <div class="turn-card">
                 <div class="turn-head">
                   <span class="ts-pill">[${esc(t.timestamp)}]</span>
-                  <strong>${esc(t.speaker)}</strong>
+                  <span>${esc(t.speaker)}</span>
                 </div>
-                <div style="font-size:12.5px;color:var(--ink-secondary);">${esc(t.text)}</div>
+                <p class="turn-body">${esc(t.text)}</p>
               </div>`
               )
               .join("")}
@@ -449,16 +422,14 @@
 
       box.innerHTML = `
         <div class="inspector-head">
-          <div>
-            <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;">
-              <span class="mod-tag mod-${esc(a.modality)}">${esc(modLabel(a.modality))}</span>
-              <span class="cls-badge cls-${esc(a.classification)}">${esc(a.classification)}</span>
-              ${a.residency_pin ? `<span class="meta-chip ok">KMS: ${esc(a.residency_pin)}</span>` : ""}
-              ${a.owner_sla_verified ? `<span class="meta-chip ok">Owner SLA Verified</span>` : `<span class="meta-chip warn">Unverified Owner SLA</span>`}
-            </div>
-            <h3 class="inspector-title">${esc(a.title)}</h3>
-            <div class="inspector-meta">File: <code>${esc(a.filename)}</code> &middot; Owner: ${esc(a.owner)} &middot; Producer: <code>${esc(a.producer_service)}</code> &middot; Indexed into ${a.chunk_count} multi-modal chunks</div>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+            <span class="st">${esc(modLabel(a.modality))}</span>
+            <span class="st cls-${esc(a.classification)}">${esc(a.classification)}</span>
+            ${a.residency_pin ? `<span class="st st-done">KMS: ${esc(a.residency_pin)}</span>` : ""}
+            ${a.owner_sla_verified ? `<span class="st st-done">SLA Verified</span>` : `<span class="st st-prog">Unverified SLA</span>`}
           </div>
+          <h4 class="inspector-title">${esc(a.title)}</h4>
+          <div class="mono-dim">file=<code>${esc(a.filename)}</code> &middot; owner=${esc(a.owner)} &middot; producer=<code>${esc(a.producer_service)}</code> &middot; ${a.chunk_count} indexed chunks</div>
         </div>
         ${bodyHtml}
       `;
@@ -468,9 +439,10 @@
         void box.offsetWidth;
         box.classList.add("flash");
         box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        setTimeout(() => box.classList.remove("flash"), 1400);
       }
     } catch (err) {
-      box.innerHTML = `<div style="color:var(--danger);">Failed to load asset: ${esc(err.message)}</div>`;
+      box.innerHTML = `<div class="mono-dim" style="color:var(--bad);">Failed to load asset: ${esc(err.message)}</div>`;
     }
   }
 
@@ -479,8 +451,7 @@
     if (!snap) return;
     const gov = snap.governance;
     const container = document.getElementById("governance-container");
-    const scoreColor =
-      gov.readiness_score >= 90 ? "var(--ok)" : gov.readiness_score >= 65 ? "var(--warn)" : "var(--danger)";
+    const scoreColor = gov.readiness_score >= 90 ? "var(--ok)" : "var(--signal)";
 
     const findingsHtml = gov.findings.length
       ? `<div class="finding-list">
@@ -489,37 +460,37 @@
                (f) => `
              <div class="finding-card ${esc(f.severity)}">
                <div>
-                 <div style="display:flex;align-items:center;gap:7px;margin-bottom:4px;">
-                   <span class="cls-badge cls-${f.severity === "HIGH" ? "CONFIDENTIAL" : "INTERNAL"}">${esc(f.severity)} &middot; ${esc(f.rule_id)}</span>
+                 <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+                   <span class="st ${f.severity === "HIGH" ? "st-prog" : ""}">${esc(f.severity)} &middot; ${esc(f.rule_id)}</span>
                    <strong>${esc(f.title)}</strong>
                  </div>
-                 <div style="font-size:12.2px;color:var(--ink-secondary);margin-bottom:4px;">${esc(f.detail)}</div>
-                 <div style="font-size:11.8px;color:var(--accent);font-weight:600;">Agent Fix: ${esc(f.remediation_action)}</div>
+                 <p class="turn-body" style="font-size:0.98rem;margin-bottom:5px;">${esc(f.detail)}</p>
+                 <div class="mono-dim" style="color:var(--cobalt);">Remediation: ${esc(f.remediation_action)}</div>
                </div>
-               <button type="button" class="pill fix-single-btn" data-fid="${esc(f.finding_id)}">Fix Policy</button>
+               <button type="button" class="btn fix-single-btn" data-fid="${esc(f.finding_id)}">Apply Fix</button>
              </div>`
              )
              .join("")}
          </div>`
-      : `<div style="background:var(--ok-soft);border:1px solid #6ee7b7;color:#065f46;padding:14px;border-radius:8px;font-weight:600;">
-           &#10003; All 5 Enterprise Governance controls passing (100/100 Readiness). PII column masking, tenant ACLs, EU-Central KMS residency, BI owner SLAs, and transcript retention policies are active.
+      : `<div class="pii-banner" style="border-left-color:var(--ok);">
+           <span><strong>ALL 5 ENTERPRISE GOVERNANCE CONTROLS PASSING (100/100):</strong> Dynamic PII column masking, tenant ACLs, eu-central-1 KMS residency pinning, BI owner SLAs, and transcript retention tags enforced.</span>
          </div>`;
 
     const auditRows = (snap.audit_trail || []).length
-      ? `<div style="margin-top:14px;">
-           <div class="section-heading">Immutable Governance &amp; Ingestion Audit Log (SHA-256 Receipt Chain)</div>
+      ? `<div style="margin-top:18px;">
+           <p class="panel-k">Immutable Governance &amp; Ingestion Audit Chain (SHA-256)</p>
            <div class="finding-list">
              ${snap.audit_trail
                .map(
                  (ev) => `
-               <div style="background:#fff;border:1px solid var(--border);border-radius:7px;padding:8px 11px;font-size:12px;">
-                 <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;">
-                   <strong>${esc(ev.event)} &mdash; ${esc(ev.detail)}</strong>
-                   <span class="mono" style="color:var(--ink-muted);">${esc(ev.timestamp.slice(0, 19))}Z</span>
+               <div class="turn-card">
+                 <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font:500 11px var(--mono);">
+                   <span>${esc(ev.event)} &mdash; ${esc(ev.detail)}</span>
+                   <span class="mono-dim">${esc(ev.timestamp.slice(0, 19))}Z</span>
                  </div>
                  ${
                    ev.sha256_receipt
-                     ? `<div class="mono" style="font-size:11px;color:var(--ok);margin-top:3px;">SHA-256 Receipt: ${esc(ev.sha256_receipt)}</div>`
+                     ? `<div class="mono-dim" style="color:var(--ok);margin-top:4px;">sha256=${esc(ev.sha256_receipt)}</div>`
                      : ""
                  }
                </div>`
@@ -532,18 +503,18 @@
     container.innerHTML = `
       <div class="gov-hero">
         <div>
-          <div class="section-heading">Enterprise Governance Onboarding &amp; Evaluation Agent</div>
-          <div class="gov-score-ring">
+          <p class="panel-k">Enterprise Governance Onboarding &amp; Evaluation Agent</p>
+          <div style="display:flex;align-items:baseline;gap:10px;">
             <span class="gov-score-num" style="color:${scoreColor};">${gov.readiness_score}/100</span>
-            <span style="font-weight:700;color:${scoreColor};">${esc(gov.status_label)}</span>
+            <span class="st ${gov.readiness_score >= 90 ? "st-done" : "st-prog"}">${esc(gov.status_label)}</span>
           </div>
-          <div style="font-size:12px;color:var(--ink-secondary);margin-top:2px;">
-            ${gov.controls_passing} of ${gov.controls_total} governance controls passing across Space <strong>${esc(snap.active_space.name)}</strong>
+          <div class="mono-dim" style="margin-top:4px;">
+            ${gov.controls_passing} of ${gov.controls_total} controls passing across Space <strong>${esc(snap.active_space.name)}</strong>
           </div>
         </div>
         ${
           gov.open_findings_count > 0
-            ? `<button type="button" class="primary-btn" id="remediate-all-btn">&#9889; Auto-Remediate All (${gov.open_findings_count}) Violations</button>`
+            ? `<button type="button" class="btn primary" id="remediate-all-btn">Auto-Remediate All (${gov.open_findings_count}) Violations &rarr;</button>`
             : ""
         }
       </div>
@@ -555,7 +526,7 @@
     if (remAll) {
       remAll.onclick = async () => {
         remAll.disabled = true;
-        remAll.textContent = "Applying Governance Policies...";
+        remAll.textContent = "Applying Policies...";
         await apiPost(`/api/spaces/${encodeURIComponent(state.spaceId)}/governance/remediate`, {});
         await refreshWorkspace(false);
       };
@@ -597,8 +568,8 @@
     submitBtn.disabled = true;
     submitBtn.textContent = "Synthesizing...";
 
-    const welcome = feed.querySelector(".chat-welcome");
-    if (welcome) welcome.remove();
+    const empty = feed.querySelector(".chat-empty");
+    if (empty) empty.remove();
 
     const userBubble = document.createElement("div");
     userBubble.className = "msg-user";
@@ -607,7 +578,7 @@
 
     const aiBubble = document.createElement("div");
     aiBubble.className = "msg-ai";
-    aiBubble.innerHTML = `<div style="color:var(--ink-muted);">Running ACL Pre-Filter &rarr; Hybrid BM25+Vector RRF &rarr; Amazon Bedrock Nova synthesis...</div>`;
+    aiBubble.innerHTML = `<div class="mono-dim">ACL Pre-Filter &rarr; Hybrid BM25+Cosine RRF &rarr; Amazon Bedrock Nova synthesis...</div>`;
     feed.appendChild(aiBubble);
     feed.scrollTop = feed.scrollHeight;
 
@@ -626,27 +597,27 @@
 
       aiBubble.innerHTML = `
         <div class="ai-meta-bar">
-          <span class="meta-chip purple">${esc(llm.engine || "Grounded Synthesizer")}</span>
-          <span class="meta-chip ok">${ver.citation_precision_pct ?? 100}% Citation Verified</span>
+          <span class="st">${esc(llm.engine || "Grounded Synthesizer")}</span>
+          <span class="st st-done">${ver.citation_precision_pct ?? 100}% Verified</span>
           ${
             acl.blocked_assets_count > 0
-              ? `<span class="meta-chip warn">ACL Blocked ${acl.blocked_assets_count} Restricted Asset(s)</span>`
-              : `<span class="meta-chip">Searched ${acl.allowed_assets_searched} Assets</span>`
+              ? `<span class="st st-prog">ACL Blocked ${acl.blocked_assets_count}</span>`
+              : `<span class="st">${acl.allowed_assets_searched} Assets</span>`
           }
-          <span class="meta-chip">${esc(res.total_wall_ms)} ms</span>
+          <span class="st">${esc(res.total_wall_ms)} ms</span>
         </div>
         <div class="ai-answer-body">${formatAnswerWithClickableCitations(res.answer, res.citations)}</div>
         ${chartHtml}
         ${
           res.citations && res.citations.length
             ? `<div class="citations-drawer">
-                 <div style="font-size:10.5px;font-weight:700;color:var(--ink-muted);text-transform:uppercase;">Click any source to inspect exact table / timestamp / section:</div>
+                 <span class="panel-k" style="margin-bottom:2px;">Cited Sources (click to inspect):</span>
                  ${res.citations
                    .map(
                      (c) => `
                    <button type="button" class="citation-pill-btn" data-cite-asset="${esc(c.asset_id)}">
-                     <span><strong>[${esc(c.ref)}]</strong> ${esc(c.title)} &middot; <em>${esc(c.locator)}</em></span>
-                     <span class="mod-tag mod-${esc(c.modality)}">${esc(modLabel(c.modality))}</span>
+                     <span><strong>[${esc(c.ref)}]</strong> ${esc(c.title)} &middot; ${esc(c.locator)}</span>
+                     <span>${esc(modLabel(c.modality))}</span>
                    </button>`
                    )
                    .join("")}
@@ -665,10 +636,10 @@
         });
       });
     } catch (err) {
-      aiBubble.innerHTML = `<div style="color:var(--danger);">Query failed: ${esc(err.message)}</div>`;
+      aiBubble.innerHTML = `<div class="mono-dim" style="color:var(--bad);">Query error: ${esc(err.message)}</div>`;
     } finally {
       submitBtn.disabled = false;
-      submitBtn.innerHTML = "Ask Space AI &rarr;";
+      submitBtn.innerHTML = "Run Grounded Query &rarr;";
       feed.scrollTop = feed.scrollHeight;
     }
   }
@@ -704,6 +675,17 @@
   }
 
   function bindEvents() {
+    // Theme Toggle (matching ritwikareddykancharla.github.io)
+    const themeBtn = document.getElementById("theme-toggle-btn");
+    if (themeBtn) {
+      themeBtn.addEventListener("click", () => {
+        const root = document.documentElement;
+        const next = root.dataset.theme === "dark" ? "light" : "dark";
+        root.dataset.theme = next;
+        history.replaceState(null, "", next === "dark" ? "#theme=dark" : location.pathname);
+      });
+    }
+
     document.getElementById("role-select").addEventListener("change", async (e) => {
       state.roleId = e.target.value;
       state.searchHits = null;
@@ -713,7 +695,6 @@
     document.getElementById("tab-btn-assets").onclick = () => switchTab("assets");
     document.getElementById("tab-btn-governance").onclick = () => switchTab("governance");
 
-    // Search input
     let searchTimer = null;
     document.getElementById("asset-search-input").addEventListener("input", (e) => {
       clearTimeout(searchTimer);
@@ -732,17 +713,15 @@
       }, 220);
     });
 
-    // Modality pills
-    document.querySelectorAll("#modality-pills .pill").forEach((btn) => {
+    document.querySelectorAll("#modality-pills .chip-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
-        document.querySelectorAll("#modality-pills .pill").forEach((b) => b.classList.remove("active"));
+        document.querySelectorAll("#modality-pills .chip-btn").forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
         state.modalityFilter = btn.getAttribute("data-mod");
         renderAssetsStrip();
       });
     });
 
-    // Chat submit
     document.getElementById("chat-form").addEventListener("submit", (e) => {
       e.preventDefault();
       askQuestion(document.getElementById("chat-input").value);
@@ -755,7 +734,6 @@
       }
     });
 
-    // Reset button
     document.getElementById("reset-btn").onclick = async () => {
       await apiPost("/api/reset", {});
       state.roleId = "vp_admin";
@@ -766,7 +744,6 @@
       await refreshWorkspace(true);
     };
 
-    // Guided 1-click Tour buttons
     document.getElementById("tour-ask-btn").onclick = async () => {
       state.roleId = "vp_admin";
       state.spaceId = "space-q3-cloud-arr";
@@ -799,7 +776,6 @@
       await refreshWorkspace(false);
     };
 
-    // Ingest Modal
     const ingestModal = document.getElementById("ingest-modal");
     document.getElementById("open-ingest-btn").onclick = () => ingestModal.classList.remove("hidden");
     document.getElementById("close-ingest-btn").onclick = () => ingestModal.classList.add("hidden");
@@ -868,14 +844,9 @@
         alert("Ingest error: " + err.message);
       } finally {
         btn.disabled = false;
-        btn.textContent = "Parse, Scan PII & Index into Space";
+        btn.textContent = "Parse, Scan PII & Index \u2192";
       }
     });
-
-    // Architecture Modal
-    const archModal = document.getElementById("arch-modal");
-    document.getElementById("arch-btn").onclick = () => archModal.classList.remove("hidden");
-    document.getElementById("close-arch-btn").onclick = () => archModal.classList.add("hidden");
   }
 
   bindEvents();

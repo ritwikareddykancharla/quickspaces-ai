@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quickspaces-ai"
+version = "1.0.0"
+description = "Enterprise AI Workspace (Spaces): Multi-Modal Ingestion (CSV, BI, Audio VTT, Docs), Zero-Leakage Hybrid RAG on Amazon Bedrock, and Governance Onboarding Agent"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Ritwika Kancharla" }]
+
+[tool.setuptools.packages.find]
+include = ["quickspaces*"]

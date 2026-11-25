@@ -1,0 +1,11 @@
+{
+  "benchmark_suite": "QuickSpaces Multi-Modal RAG & Enterprise Governance v1.0",
+  "eval_queries": 10,
+  "hybrid_top3_recall_pct": 90.0,
+  "citation_span_precision_pct": 100.0,
+  "zero_leakage_acl_block_rate_pct": 100.0,
+  "search_latency_p50_ms": 0.67,
+  "search_latency_p95_ms": 1.15,
+  "governance_readiness_avg_before": 59.7,
+  "governance_readiness_avg_after": 100
+}

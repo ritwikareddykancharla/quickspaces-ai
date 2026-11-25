@@ -1,5 +1,7 @@
 # QuickSpaces — Multi-Modal Enterprise AI Workspace, Hybrid RAG & Governance Agent
 
+**Live Production App (Amazon CloudFront + Private S3 OAC + Bedrock Nova):** https://d2gltlwyzbnbxr.cloudfront.net
+
 **QuickSpaces** is a full-stack enterprise workspace modeled directly on the **Amazon Quick / Quick Suite** platform architecture:
 1. **Spaces & Asset Metadata Layer**: Organizes spreadsheets (`.csv`), BI KPI dashboards, timestamped call recordings (`.vtt`), and engineering RFCs (`.md`) into collaborative **Spaces** with favorites, owner lineage, and regional residency metadata.
 2. **Multi-Modal Ingestion Pipeline**:

@@ -135,7 +135,8 @@ echo " 5. Provisioning Amazon CloudFront Distribution (S3 OAC + /api/*)"
 echo "======================================================================"
 OAC_ID="$(aws cloudfront list-origin-access-controls --output json | python3 -c '
 import json, sys
-items = json.loads(sys.stdin.read()).get("OriginAccessControlList", {}).get("Items", [])
+raw = sys.stdin.read().strip()
+items = (json.loads(raw) if raw else {}).get("OriginAccessControlList", {}).get("Items", [])
 for it in items:
     if it.get("Name") == "'"${OAC_NAME}"'":
         print(it["Id"]); break
@@ -148,7 +149,8 @@ fi
 
 EXISTING_DIST="$(aws cloudfront list-distributions --output json | python3 -c '
 import json, sys
-items = json.loads(sys.stdin.read()).get("DistributionList", {}).get("Items", [])
+raw = sys.stdin.read().strip()
+items = (json.loads(raw) if raw else {}).get("DistributionList", {}).get("Items", [])
 for d in items:
     if d.get("Comment") == "QuickSpaces Enterprise AI Workspace":
         print(d["Id"] + "|" + d["DomainName"]); break

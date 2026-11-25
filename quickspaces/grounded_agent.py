@@ -144,7 +144,11 @@ def _call_bedrock_nova(system_prompt: str, user_prompt: str) -> Optional[Dict[st
     aws_bin = shutil.which("aws")
     if not aws_bin:
         return None
-    profile = os.environ.get("QUICKSPACES_BEDROCK_PROFILE", "trainium")
+    profile = (
+        os.environ.get("QUICKSPACES_BEDROCK_PROFILE")
+        or os.environ.get("AWS_PROFILE")
+        or "portfolio"
+    )
     env = dict(os.environ)
     env.pop("AWS_ACCESS_KEY_ID", None)
     env.pop("AWS_SECRET_ACCESS_KEY", None)

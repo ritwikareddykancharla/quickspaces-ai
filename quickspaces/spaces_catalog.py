@@ -7,10 +7,17 @@ import re
 import uuid
 from typing import Any, Dict, List, Optional
 
+from pathlib import Path
+
 from .governance_agent import audit_space_governance, remediate_space_governance
 from .grounded_agent import answer_space_question
 from .hybrid_retrieval import HybridSpaceIndex
 from .models import PrincipalContext, QuickSpace, SpaceAsset
+from .multimodal_agentz import (
+    AGENTZ_PRESET_SPECS,
+    AgentZWorkstreamCompiler,
+    run_merkle_ir_evaluation,
+)
 from .multimodal_ingest import EMAIL_VALUE_RE, SSN_VALUE_RE, ingest_Space_asset, mask_pii_value
 
 PRINCIPALS: Dict[str, PrincipalContext] = {
@@ -419,12 +426,13 @@ QuickSpaces enforces tenant, regional residency, and classification clearance ch
 
 
 class QuickSpacesWorkspace:
-    """In-memory + optional DynamoDB-backed stateful service for QuickSpaces."""
+    """In-memory + SQLite WAL stateful service for QuickSpaces v2."""
 
-    def __init__(self) -> None:
+    def __init__(self, agentz_db_path: Optional[Path] = None) -> None:
         self.spaces: List[QuickSpace] = _seed_spaces()
         self.assets: List[SpaceAsset] = _seed_assets()
         self.audit_trail: List[Dict[str, Any]] = []
+        self.agentz = AgentZWorkstreamCompiler(db_path=agentz_db_path)
 
     def reset(self) -> None:
         self.spaces = _seed_spaces()
@@ -470,6 +478,7 @@ class QuickSpacesWorkspace:
             "available_principals": [p.to_dict() for p in PRINCIPALS.values()],
             "assets": assets_list,
             "governance": governance,
+            "agentz_presets": list(AGENTZ_PRESET_SPECS.values()),
             "audit_trail": list(reversed(self.audit_trail[-12:])),
         }
 
@@ -638,3 +647,43 @@ class QuickSpacesWorkspace:
             }
         )
         return out
+
+    def evaluate_merkle_ir(
+        self,
+        bm25_k1: float = 1.5,
+        bm25_b: float = 0.75,
+        rrf_k: float = 20.0,
+        custom_q4_expansion_usd: int = 1380000,
+        revoke_pages: Optional[List[int]] = None,
+        sample_query: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        return run_merkle_ir_evaluation(
+            bm25_k1=bm25_k1,
+            bm25_b=bm25_b,
+            rrf_k=rrf_k,
+            custom_q4_expansion_usd=custom_q4_expansion_usd,
+            revoke_pages=revoke_pages,
+            sample_query=sample_query,
+        )
+
+    def execute_agentz_workflow(
+        self,
+        spec: Optional[Dict[str, Any]] = None,
+        preset_id: str = "emea-finserv-arr-recovery",
+        prompt: str = "",
+        role_id: str = "vp_admin",
+        execution_key: Optional[str] = None,
+        simulate_retry: bool = True,
+    ) -> Dict[str, Any]:
+        principal = self.get_principal(role_id)
+        chosen_spec = spec if spec is not None else copy.deepcopy(
+            AGENTZ_PRESET_SPECS.get(preset_id, AGENTZ_PRESET_SPECS["emea-finserv-arr-recovery"])
+        )
+        return self.agentz.execute_spec_workflow(
+            raw_spec=chosen_spec,
+            prompt=prompt,
+            assets=self.assets,
+            principal=principal,
+            execution_key=execution_key,
+            simulate_retry=simulate_retry,
+        )

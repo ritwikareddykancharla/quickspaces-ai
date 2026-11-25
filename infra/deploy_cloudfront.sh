@@ -152,7 +152,7 @@ import json, sys
 raw = sys.stdin.read().strip()
 items = (json.loads(raw) if raw else {}).get("DistributionList", {}).get("Items", [])
 for d in items:
-    if d.get("Comment") == "QuickSpaces Enterprise AI Workspace":
+    if d.get("Id") == "E3HTQVO295L6F7" or d.get("Comment") == "QuickSpaces Enterprise AI Workspace":
         print(d["Id"] + "|" + d["DomainName"]); break
 ')"
 

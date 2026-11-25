@@ -39,6 +39,7 @@ def route_api_request(
             return 200, {
                 "status": "ok",
                 "service": "quickspaces-ai",
+                "version": "2.0.0",
                 "delivery": os.environ.get("QUICKSPACES_DELIVERY", "cloudfront-s3-oac + api-origin"),
                 "aws_region": os.environ.get("AWS_REGION", "us-west-2"),
                 "bedrock_model": os.environ.get("QUICKSPACES_BEDROCK_MODEL", "us.amazon.nova-lite-v1:0"),
@@ -46,6 +47,11 @@ def route_api_request(
                 "request_id": request_id,
                 "spaces_count": len(WORKSPACE.spaces),
                 "assets_count": len(WORKSPACE.assets),
+                "capabilities": [
+                    "pre_retrieval_acl_hybrid_rag",
+                    "merkle_multimodal_ir_ndcg10",
+                    "agentz_sqlite_wal_flows",
+                ],
             }
 
         if method == "GET" and path == "/api/state":
@@ -112,11 +118,60 @@ def route_api_request(
             finding_id = body.get("finding_id")
             return 200, WORKSPACE.remediate_governance(space_id=space_id, finding_id=finding_id)
 
+        if method in ("GET", "POST") and path == "/api/ir/merkle-eval":
+            params = {**query, **body}
+            bm25_k1 = float(params.get("bm25_k1") or 1.5)
+            bm25_b = float(params.get("bm25_b") or 0.75)
+            rrf_k = float(params.get("rrf_k") or 20.0)
+            q4_usd = int(params.get("custom_q4_expansion_usd") or 1380000)
+            raw_rev = params.get("revoke_pages")
+            if isinstance(raw_rev, list):
+                revoke_pages = [int(x) for x in raw_rev]
+            elif isinstance(raw_rev, str) and raw_rev.strip():
+                revoke_pages = [int(x.strip()) for x in raw_rev.split(",") if x.strip().isdigit()]
+            else:
+                revoke_pages = None
+            sample_q = str(params.get("sample_query") or "").strip() or None
+            out = WORKSPACE.evaluate_merkle_ir(
+                bm25_k1=bm25_k1,
+                bm25_b=bm25_b,
+                rrf_k=rrf_k,
+                custom_q4_expansion_usd=q4_usd,
+                revoke_pages=revoke_pages,
+                sample_query=sample_q,
+            )
+            out["request_id"] = request_id
+            return 200, out
+
+        if method in ("GET", "POST") and path == "/api/agentz/execute":
+            params = {**query, **body}
+            raw_spec = body.get("spec") if method == "POST" else None
+            if isinstance(raw_spec, str) and raw_spec.strip():
+                raw_spec = json.loads(raw_spec)
+            preset_id = str(params.get("preset_id") or "emea-finserv-arr-recovery")
+            prompt = str(params.get("prompt") or "")
+            role_id = str(params.get("role") or "vp_admin")
+            exec_key = str(params.get("execution_key") or "").strip() or None
+            sim_retry_raw = params.get("simulate_retry", True)
+            sim_retry = sim_retry_raw not in (False, "false", "0", 0)
+            out = WORKSPACE.execute_agentz_workflow(
+                spec=raw_spec,
+                preset_id=preset_id,
+                prompt=prompt,
+                role_id=role_id,
+                execution_key=exec_key,
+                simulate_retry=sim_retry,
+            )
+            out["request_id"] = request_id
+            return 200, out
+
         if method == "POST" and path == "/api/reset":
             WORKSPACE.reset()
             return 200, {"status": "reset_complete"}
 
         return 404, {"error": f"Unknown API route: {method} {path}"}
+    except ValueError as exc:
+        return 400, {"error": str(exc)}
     except KeyError as exc:
         return 404, {"error": str(exc)}
     except Exception as exc:

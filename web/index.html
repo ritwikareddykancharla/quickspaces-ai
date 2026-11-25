@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>QuickSpaces — Agentic Enterprise Workspace, Multi-Modal RAG &amp; Pre-Retrieval Governance</title>
-  <meta name="description" content="Agentic Enterprise Workspace uniting Spreadsheets, BI Dashboards, Call Transcripts, and Engineering RFCs with 100.0% Pre-Retrieval ACL Block Rate, 90.0% Hybrid Top-3 Recall (0.67 ms p50 / 1.15 ms p95), 100.0% Citation Span Precision on Amazon Bedrock Nova, and 59.7 to 100 Autonomous Governance Remediation." />
+  <title>QuickSpaces — One Search &amp; AI Assistant Across Your Team's Spreadsheets, Dashboards, Calls, and Docs</title>
+  <meta name="description" content="QuickSpaces lets teams search and ask questions across spreadsheets, BI dashboards, call recordings, and design docs while checking permissions and masking sensitive columns before retrieval." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&amp;family=Kalam:wght@400;700&amp;family=Martian+Mono:wght@400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&amp;family=Schibsted+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" />
@@ -79,8 +79,8 @@
       padding-bottom: 4.5rem;
     }
 
-    /* Human-Readability & Deep-Dive Layout Components */
-    .plain-english-callout {
+    /* Editorial Callouts & Architecture Cards */
+    .lead-callout {
       background: var(--bg-card);
       border: 2px solid var(--border);
       border-left: 8px solid var(--accent-main);
@@ -88,7 +88,7 @@
       padding: 1.45rem 1.6rem;
       margin-bottom: 1.5rem;
     }
-    .plain-english-callout h3 {
+    .lead-callout h3 {
       font-size: 1.12rem;
       font-weight: 800;
       margin-bottom: 0.55rem;
@@ -97,16 +97,16 @@
       gap: 0.55rem;
       flex-wrap: wrap;
     }
-    .plain-english-callout p {
+    .lead-callout p {
       font-family: 'Newsreader', Georgia, serif;
       font-size: 1.13rem;
       line-height: 1.72;
       color: var(--ink);
       margin-bottom: 0.65rem;
     }
-    .plain-english-callout p:last-child { margin-bottom: 0; }
+    .lead-callout p:last-child { margin-bottom: 0; }
 
-    .worked-example-card {
+    .scenario-card {
       background: var(--bg-card);
       border: 2px solid var(--border);
       box-shadow: var(--shadow);
@@ -144,43 +144,42 @@
       margin-bottom: 1.45rem;
     }
     @media (max-width: 960px) { .dual-layer-grid { grid-template-columns: 1fr; } }
-    .intuition-card, .hood-card {
+    .design-card, .mechanics-card {
       background: var(--bg-card);
       border: 2px solid var(--border);
       box-shadow: var(--shadow);
       padding: 1.35rem 1.45rem;
       line-height: 1.68;
     }
-    .intuition-card { border-top: 6px solid var(--pass); }
-    .hood-card { border-top: 6px solid var(--blue); }
-    .intuition-card h3, .hood-card h3 {
+    .design-card { border-top: 6px solid var(--pass); }
+    .mechanics-card { border-top: 6px solid var(--blue); }
+    .design-card h3, .mechanics-card h3 {
       font-size: 1.05rem;
       font-weight: 800;
       margin: 0.35rem 0 0.55rem;
     }
-    .intuition-card p, .hood-card p {
+    .design-card p, .mechanics-card p {
       font-size: 0.91rem;
       color: var(--ink-muted);
       line-height: 1.68;
     }
 
-    .sandbox-guide-banner {
+    .demo-note-banner {
       background: var(--bg-subtle);
       border: 2px solid var(--border);
       border-left: 6px solid var(--accent-main);
       box-shadow: var(--shadow-sm);
-      padding: 1.05rem 1.25rem;
+      padding: 0.95rem 1.2rem;
       margin-bottom: 1.25rem;
-      line-height: 1.68;
+      line-height: 1.65;
       font-size: 0.9rem;
     }
-    .sandbox-guide-banner strong.guide-title {
-      display: block;
-      font-family: 'Martian Mono', monospace;
-      font-size: 0.73rem;
-      text-transform: uppercase;
-      color: var(--accent-deep);
-      margin-bottom: 0.35rem;
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-bottom: 1.35rem;
     }
 
     .serif { font-family: 'Newsreader', Georgia, serif; }
@@ -619,8 +618,8 @@
       border: 1.5px solid var(--border);
     }
 
-    /* Excalidraw Architecture Canvas (§02) */
-    .excalidraw-toolbar {
+    /* Architecture Diagram Canvas (§02) */
+    .arch-toolbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -632,7 +631,7 @@
       border-bottom: none;
     }
 
-    .excalidraw-viewport {
+    .arch-viewport {
       background-color: #FFFFFF;
       background-image: radial-gradient(rgba(24, 24, 27, 0.14) 1px, transparent 1px);
       background-size: 18px 18px;
@@ -642,7 +641,7 @@
       padding: 0.9rem;
     }
 
-    .excalidraw-svg {
+    .arch-svg {
       display: block;
       width: 100%;
       min-width: 980px;
@@ -650,7 +649,7 @@
       transition: width 0.22s ease, min-width 0.22s ease;
     }
 
-    .excalidraw-svg.zoom-125 {
+    .arch-svg.zoom-125 {
       width: 125%;
       min-width: 1225px;
     }
@@ -1273,17 +1272,17 @@
   <!-- Sticky Topbar -->
   <header class="topbar" id="mainTopbar">
     <div class="container topbar-inner">
-      <a href="#spaces-studio" class="brand" onclick="switchTab('spaces-studio')">
-        <span class="brand-badge">QUICKSPACES v1.0</span>
+      <a href="#live-sandboxes" class="brand" onclick="switchTab('spaces-studio')">
+        <span class="brand-badge">QUICKSPACES</span>
         <span>QuickSpaces</span>
       </a>
       <nav class="nav-links" aria-label="Primary Navigation">
-        <a class="nav-pill" href="#problem-statement" data-nav-sec="problem-statement">§01 Problem</a>
-        <a class="nav-pill" href="#architecture" data-nav-sec="architecture">§02 Architecture</a>
-        <a class="nav-pill" href="#implementation" data-nav-sec="implementation">§03 Implementation</a>
-        <a class="nav-pill" href="#why-it-wins" data-nav-sec="why-it-wins">§04 Trade-Offs</a>
-        <a class="nav-pill" href="#live-sandboxes" data-nav-sec="live-sandboxes" onclick="switchTab('spaces-studio')">§05 Interactive Studio</a>
-        <a class="nav-pill" href="#live-sandboxes" onclick="switchTab('benchmarks')">§06 Benchmarks</a>
+        <a class="nav-pill" href="#problem-statement" data-nav-sec="problem-statement">01 · Problem</a>
+        <a class="nav-pill" href="#architecture" data-nav-sec="architecture">02 · Architecture</a>
+        <a class="nav-pill" href="#implementation" data-nav-sec="implementation">03 · Implementation</a>
+        <a class="nav-pill" href="#why-it-wins" data-nav-sec="why-it-wins">04 · Trade-Offs</a>
+        <a class="nav-pill" href="#live-sandboxes" data-nav-sec="live-sandboxes" onclick="switchTab('spaces-studio')">05 · Live Demo</a>
+        <a class="nav-pill" href="#live-sandboxes" onclick="switchTab('benchmarks')">06 · Benchmarks</a>
         <a class="btn btn-obsidian" href="https://github.com/ritwikareddykancharla/quickspaces-ai" target="_blank" rel="noopener">★ GitHub Repo</a>
         <button type="button" class="btn btn-secondary" id="themeToggleBtn" aria-label="Toggle color theme">
           <span id="themeIcon">🌙</span>
@@ -1297,62 +1296,55 @@
     <!-- Hero -->
     <section class="hero">
       <div class="hero-top-row">
-        <div class="eyebrow">Multi-Modal Enterprise Spaces • Pre-Retrieval ACL Gate • Amazon Bedrock Nova</div>
+        <div class="eyebrow">Enterprise Team Workspaces · Built for Amazon Quick</div>
         <div class="runtime-pill" id="runtimePill">
           <span class="pulse-dot"></span>
-          <span id="runtimeModeText">Probing CloudFront /api/health...</span>
+          <span id="runtimeModeText">Live on AWS · Powered by Amazon Bedrock</span>
         </div>
       </div>
 
-      <h1>QuickSpaces — Agentic Enterprise Workspace, Multi-Modal RAG &amp; Pre-Retrieval Governance</h1>
+      <h1>QuickSpaces — One Search &amp; AI Assistant Across Your Team's Spreadsheets, Dashboards, Calls, and Docs</h1>
       <p class="hero-sub">
-        Unifies enterprise spreadsheets (<code>.csv</code>), executive BI dashboards (<code>.quickbi</code>), timestamped customer escalation transcripts (<code>.vtt</code>), and engineering RFCs (<code>.md</code>) inside governed team Spaces—enforcing tenant, regional KMS residency, and dynamic PII column masking <em>before</em> hybrid BM25 + vector retrieval (<code>0.67 ms</code> p50 / <code>1.15 ms</code> p95) reaches Amazon Bedrock Nova.
+        Teams scatter answers across spreadsheets, revenue charts, call recordings, and design docs. Standard AI search either misses numbers or leaks restricted rows. QuickSpaces checks who is asking first, masks sensitive columns automatically, and answers with verified citations across every file.
       </p>
 
-      <div class="headline-pills">
-        <div class="headline-pill">Hybrid Top-3 Recall: <span>90.0% (up from 80.0%)</span></div>
-        <div class="headline-pill">Citation Span Precision: <span>100.0%</span></div>
-        <div class="headline-pill">Pre-Retrieval ACL Block Rate: <span>100.0% (5/5)</span></div>
-        <div class="headline-pill">Search p50 / p95: <span>0.67 ms / 1.15 ms</span></div>
-        <div class="headline-pill">Governance Readiness: <span>59.7 → 100</span></div>
+      <div class="hero-cta-row">
+        <a href="#live-sandboxes" class="btn btn-accent" onclick="switchTab('spaces-studio')">▶ Try the Live Demo ↓</a>
+        <a href="#architecture" class="btn btn-secondary">See How It Works ↓</a>
+        <a href="#live-sandboxes" class="btn btn-secondary" onclick="switchTab('benchmarks')">View Test Results ↓</a>
       </div>
 
       <div class="kpi-strip">
         <div class="card kpi-card">
-          <div class="kpi-val">90.0%</div>
-          <div class="kpi-label">Hybrid Top-3 Asset Recall</div>
-          <div class="kpi-sub">9/10 eval queries · BM25 + Cosine RRF + MaxPool (vs 80.0% chunk-only)</div>
+          <div class="kpi-val">90.0% (9 / 10)</div>
+          <div class="kpi-label">Top-3 Search Accuracy</div>
+          <div class="kpi-sub">Finds the right file across sheets, charts, calls &amp; docs in 0.67 ms (1.15 ms p95), up from 80.0%</div>
         </div>
         <div class="card kpi-card">
-          <div class="kpi-val">100.0%</div>
-          <div class="kpi-label">Citation Span Precision</div>
-          <div class="kpi-sub">10/10 verified [C1..C5] locators across CSV, BI, VTT &amp; RFCs</div>
+          <div class="kpi-val">100.0% (10 / 10)</div>
+          <div class="kpi-label">Verified Inline Citations</div>
+          <div class="kpi-sub">Every answer links directly to the exact table rollup, dashboard metric, call timestamp, or doc section</div>
         </div>
         <div class="card kpi-card">
-          <div class="kpi-val">100.0%</div>
-          <div class="kpi-label">Pre-Retrieval ACL Block Rate</div>
-          <div class="kpi-sub">5/5 adversarial contractor &amp; clearance probes blocked · 0.0% leak</div>
-        </div>
-        <div class="card kpi-card">
-          <div class="kpi-val">0.67 ms / 1.15 ms</div>
-          <div class="kpi-label">Search Latency (p50 / p95)</div>
-          <div class="kpi-sub">Pre-filtered BM25 + N-gram cosine Reciprocal Rank Fusion</div>
+          <div class="kpi-val">0 Data Leaks</div>
+          <div class="kpi-label">100.0% (5 / 5) Access Probes Blocked</div>
+          <div class="kpi-sub">Filters unauthorized contractor and regional files before search ever scores a candidate</div>
         </div>
         <div class="card kpi-card">
           <div class="kpi-val">59.7 → 100</div>
-          <div class="kpi-label">Governance Readiness Score</div>
-          <div class="kpi-sub">3-Space mean (45, 75, 59 → 100) · 5 controls + SHA-256 WORM</div>
+          <div class="kpi-label">Automated Security Score</div>
+          <div class="kpi-sub">Audits 3 workspaces for unmasked PII, guest links, and regional encryption, fixing all 5 controls in one click</div>
         </div>
       </div>
 
-      <div class="pipeline-bar" aria-label="Architecture Pipeline">
-        <div class="pipe-step"><span class="pipe-num">01</span><span>Pre-Retrieval ACL Gate (100.0% Block)</span></div>
+      <div class="pipeline-bar" aria-label="Request Flow">
+        <div class="pipe-step"><span class="pipe-num">01</span><span>Check Permissions &amp; Mask Sensitive Columns</span></div>
         <span class="pipe-arrow">→</span>
-        <div class="pipe-step"><span class="pipe-num">02</span><span>Hybrid RRF + MaxPool (0.67ms p50 · 90.0% Recall)</span></div>
+        <div class="pipe-step"><span class="pipe-num">02</span><span>Search Spreadsheets, Charts, Calls &amp; Docs</span></div>
         <span class="pipe-arrow">→</span>
-        <div class="pipe-step"><span class="pipe-num">03</span><span>Bedrock Nova Cited Q&amp;A (100.0% Span Valid)</span></div>
+        <div class="pipe-step"><span class="pipe-num">03</span><span>Answer with Verified Citations &amp; Charts</span></div>
         <span class="pipe-arrow">→</span>
-        <div class="pipe-step"><span class="pipe-num">04</span><span>5-Rule Governance Agent (59.7 → 100)</span></div>
+        <div class="pipe-step"><span class="pipe-num">04</span><span>Audit &amp; Fix Workspace Security</span></div>
       </div>
     </section>
   </div>
@@ -1361,128 +1353,121 @@
   <nav class="sticky-toc" id="stickyToc" aria-label="Jump to Section Table of Contents">
     <div class="container sticky-toc-inner">
       <span class="toc-label">Jump To:</span>
-      <a href="#problem-statement" class="toc-chip active" data-toc-link="problem-statement">§01 · Problem Statement</a>
-      <a href="#architecture" class="toc-chip" data-toc-link="architecture">§02 · System Architecture</a>
-      <a href="#implementation" class="toc-chip" data-toc-link="implementation">§03 · Implementation</a>
-      <a href="#why-it-wins" class="toc-chip" data-toc-link="why-it-wins">§04 · Design Trade-Offs</a>
-      <a href="#live-sandboxes" class="toc-chip" data-toc-link="live-sandboxes" onclick="switchTab('spaces-studio')">§05 · Interactive Studio</a>
-      <a href="#live-sandboxes" class="toc-chip" data-toc-link="benchmarks" onclick="switchTab('benchmarks')">§06 · Benchmarks</a>
+      <a href="#problem-statement" class="toc-chip active" data-toc-link="problem-statement">01 · Problem</a>
+      <a href="#architecture" class="toc-chip" data-toc-link="architecture">02 · Architecture</a>
+      <a href="#implementation" class="toc-chip" data-toc-link="implementation">03 · Implementation</a>
+      <a href="#why-it-wins" class="toc-chip" data-toc-link="why-it-wins">04 · Trade-Offs</a>
+      <a href="#live-sandboxes" class="toc-chip" data-toc-link="live-sandboxes" onclick="switchTab('spaces-studio')">05 · Live Demo</a>
+      <a href="#live-sandboxes" class="toc-chip" data-toc-link="benchmarks" onclick="switchTab('benchmarks')">06 · Benchmarks</a>
     </div>
   </nav>
 
   <main class="container">
     <!-- =================================================================== -->
-    <!-- §01 · PROBLEM STATEMENT                                             -->
+    <!-- 01 · PROBLEM                                                        -->
     <!-- =================================================================== -->
     <section id="problem-statement" class="section" data-spy-section="problem-statement">
       <div id="how-it-works"></div>
       <div class="section-header">
         <div>
-          <span class="section-kicker">§01 · Problem Statement</span>
-          <h2 class="section-title">Why Enterprise Workspace RAG Leaks Restricted Data &amp; Fails Across Modalities</h2>
+          <span class="section-kicker">01 · Problem</span>
+          <h2 class="section-title">Problem</h2>
           <p class="section-desc">
-            Why bolting dense vector search onto corporate spreadsheets, BI dashboards, call transcripts, and RFCs breaks enterprise security and retrieval accuracy—and how QuickSpaces solves all three failure modes.
+            A shared team workspace holds spreadsheets, BI dashboards, call transcripts, and design docs under different access levels. Indexing all of them in a flat vector store introduces three failure modes.
           </p>
         </div>
-        <span class="tag tag-accent">Amazon Quick Suite Inspired Architecture</span>
+        <span class="tag tag-accent">10 Queries · 5 Access Probes · 3 Workspaces</span>
       </div>
 
-      <div class="plain-english-callout">
-        <h3><span class="tag tag-accent">IN PLAIN ENGLISH</span> What QuickSpaces Does &amp; Why Standard Enterprise AI Chatbots Leak Secrets</h3>
+      <div class="lead-callout">
+        <h3>Permission Checks and Search Across Four File Formats</h3>
         <p>
-          Imagine a company team folder ("Space") that holds four completely different kinds of files about Q3 cloud revenue: a finance spreadsheet full of customer ARR numbers and social security / API key columns, an executive BI dashboard, a 45-minute recorded customer escalation call, and an engineering RFC document. When a VP asks <em>"Why did EMEA revenue drop in Q3 and when does the fix ship?"</em>, they want one grounded answer that pulls the exact dollar drop from the spreadsheet, the regional trend from the BI chart, and the November 18 ship date spoken at <code>[08:45]</code> on the call.
+          Suppose a shared workspace holds four files on Q3 cloud revenue: a finance spreadsheet with customer revenue alongside Social Security numbers and API keys, an executive BI dashboard, a 45-minute customer escalation call, and an engineering design doc. Answering <em>"What drove the Q3 European revenue drop and when does the fix ship?"</em> requires the account contraction numbers from the spreadsheet, the regional trend from the dashboard, and the November 18 ship date stated at <code>[08:45]</code> on the call.
         </p>
         <p>
-          Most RAG systems dump every document chunk into one vector index, fetch the top matches first, and check permissions second. That breaks in two ways: an external contractor can trigger side-channel leaks or receive empty answers because restricted chunks hogged the top slots, and long call transcripts drown out compact CSV tables. <strong>QuickSpaces checks who you are, which region you sit in, and which spreadsheet columns contain PII <em>before</em> scoring a single chunk</strong>—then fuses keyword + semantic search across all four file types and audits Space security settings automatically.
+          Standard retrieval fetches global top matches first and checks permissions afterward. If confidential files take the top slots, lower-clearance users get empty answers or unmasked sensitive columns leak into the prompt. At the same time, long call transcripts produce dozens of chunks and crowd out compact tables. <strong>QuickSpaces checks caller permissions and masks sensitive columns before scoring any candidate</strong>, pools chunk scores per file, and audits workspace security controls.
         </p>
-      </div>
-
-      <div class="role-alignment-banner">
-        <div style="font-size:0.9rem;">
-          <strong>🎯 Enterprise Workspace Problem Space:</strong> Built for multi-tenant collaborative AI workspaces (modeled on <strong>Amazon Quick / Quick Suite</strong>) where executives, regional analysts, and external contractors collaborate over mixed tabular, BI, conversational, and technical assets under strict GDPR/KMS &amp; PII compliance.
-        </div>
-        <span class="tag tag-pass">10 Eval Queries · 5 Adversarial Probes · 3 Spaces</span>
       </div>
 
       <div class="problem-grid">
         <div class="problem-card">
           <div>
-            <span class="step-badge">PROBLEM 01 · POST-RETRIEVAL ACL LEAKS</span>
-            <h3>Post-Retrieval Filtering Leaks &amp; Starves Context</h3>
+            <span class="step-badge">01 · POST-SEARCH PERMISSION GAPS</span>
+            <h3>Post-Search Filtering Leaks Data or Starves Results</h3>
             <p>
-              Standard RAG retrieves global top-<em>K</em> vector chunks first and filters permissions afterward. When confidential EMEA escalation transcripts dominate top-<em>K</em>, unauthorized callers suffer empty top-<em>K</em> starvation—or worse, unmasked PII columns (<code>signatory_ssn</code>, <code>cfo_contact_phone</code>, <code>connector_api_key</code>) leak into LLM prompt assembly.
+              Fetching global top-<em>K</em> chunks before checking permissions lets confidential transcripts occupy every top slot. Lower-clearance callers receive empty results even when public files exist, or unmasked columns (<code>signatory_ssn</code>, <code>cfo_contact_phone</code>, <code>connector_api_key</code>) enter prompt assembly.
             </p>
           </div>
-          <div class="problem-stat">🛑 Security Gap: 5 adversarial contractor &amp; regional clearance probes target restricted assets</div>
+          <div class="problem-stat">5 contractor &amp; regional access probes tested against restricted files</div>
         </div>
 
         <div class="problem-card">
           <div>
-            <span class="step-badge">PROBLEM 02 · CHUNK-ONLY BIAS ACROSS MODALITIES</span>
-            <h3>Long Transcripts Crowd Out Tabular &amp; BI Rollups</h3>
+            <span class="step-badge">02 · VERBOSE TRANSCRIPT BIAS</span>
+            <h3>Long Call Recordings Crowd Out Compact Tables</h3>
             <p>
-              Splitting CSV cohorts, BI KPI cards, 45-minute <code>.vtt</code> call recordings, and Markdown RFCs into uniform text chunks lets verbose transcripts flood top-3 slots while structured numeric rollups (<code>sum</code>, <code>avg</code>, cohort deltas) miss retrieval—limiting chunk-only ranking to <strong>80.0%</strong> top-3 asset recall.
+              Splitting spreadsheets, dashboard cards, 45-minute call recordings, and design docs into uniform text chunks lets a 40-turn call fill the top slots while numeric rollups (<code>sum</code>, <code>avg</code>, cohort deltas) miss the cutoff. Flat chunk ranking reaches <strong>80.0%</strong> top-3 recall.
             </p>
           </div>
-          <div class="problem-stat">📉 Retrieval Gap: 80.0% chunk-only Top-3 asset recall without RRF + Asset Max-Pooling</div>
+          <div class="problem-stat">80.0% top-3 recall with flat chunk ranking vs. 90.0% with per-file pooling</div>
         </div>
 
         <div class="problem-card">
           <div>
-            <span class="step-badge">PROBLEM 03 · MANUAL WORKSPACE GOVERNANCE DRIFT</span>
-            <h3>Unmasked PII, Guest Links &amp; Missing EU KMS Pins</h3>
+            <span class="step-badge">03 · CONFIGURATION DRIFT</span>
+            <h3>Shared Folders Accumulate Unmasked PII and Guest Links</h3>
             <p>
-              Teams continuously upload ad-hoc CSVs and call recordings into shared Spaces without enabling column-level PII masking, revoking external contractor share links, pinning EMEA confidential shards to <code>eu-central-1</code> KMS CMKs, or attaching <code>retention:90d</code> S3 Object Lock tags.
+              Teams upload spreadsheets and call recordings into shared workspaces without locking sensitive columns, revoking external contractor links, pinning European data to <code>eu-central-1</code> KMS keys, or setting 90-day retention tags.
             </p>
           </div>
-          <div class="problem-stat">⚠ Governance Drift: 59.7 / 100 average initial readiness across the 3 enterprise Spaces</div>
+          <div class="problem-stat">59.7 / 100 average starting security score across the 3 workspaces</div>
         </div>
       </div>
 
-      <div class="worked-example-card">
-        <span class="step-badge">CONCRETE END-TO-END WORKED EXAMPLE · ONE QUERY ACROSS TWO ROLES</span>
-        <h3 style="font-size:1.14rem; font-weight:800; margin-bottom:0.45rem;">Tracing <code>POST /api/spaces/space-q3-cloud-arr/ask</code> Step-by-Step</h3>
+      <div class="scenario-card">
+        <span class="step-badge">REQUEST TRACE · TWO ACCESS LEVELS</span>
+        <h3 style="font-size:1.14rem; font-weight:800; margin-bottom:0.45rem;">Example: Answering an EMEA Revenue Question Across Two Access Levels</h3>
         <p style="font-size:0.92rem; color:var(--ink-muted); line-height:1.68;">
-          Follow what happens inside <code>quickspaces/</code> when a user asks: <em>"Why did NordBank and AlpineRe EMEA ARR contract by 1.42M in Q3, and when does SCIM v2 ship?"</em>
+          Request trace for <code>POST /api/spaces/space-q3-cloud-arr/ask</code> on the question: <em>"How much did NordBank and AlpineRe EMEA ARR contract in Q3, and when does SCIM v2 ship?"</em>
         </p>
         <div class="worked-stages">
           <div class="worked-stage">
-            <strong class="stage-head">Stage 1 · Pre-Retrieval ACL (0.18 ms)</strong>
-            If the caller is <code>external_partner</code> (<code>PUBLIC</code> only), <code>can_access_asset()</code> withholds 4/5 restricted Space files <em>before</em> indexing—returning only public tier pricing (<code>0</code> leaks). Under <code>vp_admin</code>, all 5 NA+EMEA <code>CONFIDENTIAL</code> assets pass.
+            <strong class="stage-head">Step 1 · Permission Gate (0.18 ms)</strong>
+            For an external contractor, <code>can_access_asset()</code> excludes 4 of the 5 workspace files before search runs, leaving only the public pricing guide (<code>0</code> leaks). For a VP Admin, all 5 files remain eligible.
           </div>
           <div class="worked-stage">
-            <strong class="stage-head">Stage 2 · Hybrid RRF + MaxPool (0.67 ms)</strong>
-            <code>HybridRetriever</code> scores cleared chunks with Okapi BM25 + 3-gram cosine similarity, fuses ranks via <code>1/(60 + r)</code>, and max-pools per asset so <code>q3_arr_retention_cohorts.csv</code> (<code>C1</code>), <code>exec_nrr_pulse.quickbi</code> (<code>C2</code>), <code>oct14_emea_finserv_escalation.vtt</code> (<code>C3</code>), and <code>rfc_042</code> (<code>C4</code>) all surface.
+            <strong class="stage-head">Step 2 · Hybrid Search (0.67 ms)</strong>
+            <code>HybridRetriever</code> scores cleared chunks with Okapi BM25 and 3-gram cosine similarity, combines ranks via <code>1/(60 + r)</code>, and pools the highest chunk score per file so the spreadsheet (<code>C1</code>), BI dashboard (<code>C2</code>), call recording (<code>C3</code>), and RFC (<code>C4</code>) all rank in the top set.
           </div>
           <div class="worked-stage">
-            <strong class="stage-head">Stage 3 · Bedrock Nova + Span Check</strong>
-            <code>us.amazon.nova-lite-v1:0</code> synthesizes the cross-modal answer citing <code>-$620K</code> NordBank / <code>-$460K</code> AlpineRe <code>[C1]</code>, <code>79.0%</code> EMEA NRR <code>[C2]</code>, and the <code>Nov 18, 2026</code> GA date at <code>[08:45]</code> <code>[C3][C4]</code>. Every <code>[Ck]</code> span verifies at <code>100.0%</code> precision.
+            <strong class="stage-head">Step 3 · Cited Answer &amp; Verification</strong>
+            Amazon Bedrock (<code>us.amazon.nova-lite-v1:0</code>) cites <code>-$620K</code> NordBank and <code>-$460K</code> AlpineRe <code>[C1]</code>, <code>79.0%</code> EMEA net retention <code>[C2]</code>, and the <code>Nov 18, 2026</code> GA date at <code>[08:45]</code> <code>[C3][C4]</code>. Every <code>[Ck]</code> citation is checked against retrieved spans (<code>100.0%</code> precision).
           </div>
           <div class="worked-stage">
-            <strong class="stage-head">Stage 4 · Auto BI Chart &amp; WORM Audit</strong>
-            Because the query matched quantitative cohort series, QuickSpaces auto-renders a 5-bar SVG NRR chart (<code>119.6% NA</code> vs <code>79.0% EMEA</code>). Meanwhile, Governance Agent flags any unmasked SSN/API_KEY columns (<code>59.7 → 100</code> mean Space remediation).
+            <strong class="stage-head">Step 4 · Chart &amp; Security Audit</strong>
+            When a question matches quantitative retention series, QuickSpaces renders a 5-bar SVG comparison chart (<code>119.6% NA</code> vs. <code>79.0% EMEA</code>). The security auditor flags unmasked SSN or API key columns for one-click remediation (<code>59.7 → 100</code>).
           </div>
         </div>
       </div>
     </section>
 
     <!-- =================================================================== -->
-    <!-- §02 · SYSTEM ARCHITECTURE                                           -->
+    <!-- 02 · ARCHITECTURE                                                   -->
     <!-- =================================================================== -->
     <section id="architecture" class="section" data-spy-section="architecture">
       <div class="section-header">
         <div>
-          <span class="section-kicker">§02 · System Architecture</span>
-          <h2 class="section-title">End-to-End System Architecture (Edge → 4-Modality Ingest → Pre-Filter RRF → Bedrock Nova)</h2>
+          <span class="section-kicker">02 · Architecture</span>
+          <h2 class="section-title">Architecture</h2>
           <p class="section-desc">
-            End-to-end topology showing how CloudFront (<code>E3HTQVO295L6F7</code>) + Private S3 OAC + Python 3.12 Lambda orchestrates multi-modal parsing, pre-retrieval ACL filtering, hybrid RRF ranking, and Bedrock Nova cited synthesis. <strong>Click any architecture node below to inspect its contract.</strong>
+            Requests enter through CloudFront and Python 3.12 AWS Lambda, pass through format-specific parsers and a pre-retrieval access gate, rank in under a millisecond, and synthesize cited answers on Amazon Bedrock. Click any component below to inspect its module and metrics.
           </p>
         </div>
       </div>
 
-      <div class="excalidraw-toolbar">
+      <div class="arch-toolbar">
         <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
-          <span class="mono" style="font-size:0.72rem; font-weight:700;">SYSTEM ARCHITECTURE · CLICK ANY COMPONENT TO INSPECT</span>
+          <span class="mono" style="font-size:0.72rem; font-weight:700;">INTERACTIVE ARCHITECTURE · CLICK ANY NODE TO INSPECT</span>
           <span class="tag tag-soft" id="archZoomLabel">Zoom: 100%</span>
         </div>
         <div style="display:flex; align-items:center; gap:0.45rem; flex-wrap:wrap;">
@@ -1493,8 +1478,8 @@
         </div>
       </div>
 
-      <div class="excalidraw-viewport" id="archViewport">
-        <svg id="qsArchSvg" class="excalidraw-svg" viewBox="0 0 1220 710" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="QuickSpaces System Architecture Diagram">
+      <div class="arch-viewport" id="archViewport">
+        <svg id="qsArchSvg" class="arch-svg" viewBox="0 0 1220 710" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="QuickSpaces System Architecture Diagram">
           <defs>
             <pattern id="qsDotGrid" width="20" height="20" patternUnits="userSpaceOnUse">
               <circle cx="2" cy="2" r="1" fill="#D4D4D8" />
@@ -1553,14 +1538,14 @@
             <text x="782" y="141" text-anchor="middle" class="ex-mono" font-size="9.3" fill="#9A3412">quickspaces/server.py · /api/*</text>
           </g>
 
-          <!-- Tilted Sticky Note -->
+          <!-- Measured Results Callout -->
           <g transform="rotate(-1.6 1060 95)">
             <path d="M 940,40 L 1178,40 L 1178,134 L 1160,150 L 940,150 Z" fill="#FEF3C7" stroke="#18181B" stroke-width="2" />
             <path d="M 1160,150 L 1160,134 L 1178,134" fill="#FDE68A" stroke="#18181B" stroke-width="1.6" />
-            <text x="954" y="66" class="ex-hand" font-size="19" font-weight="700" fill="#92400E">📌 Sticky Note: Verified Eval</text>
+            <text x="954" y="66" class="ex-hand" font-size="19" font-weight="700" fill="#92400E">Measured Results</text>
             <text x="954" y="88" class="ex-hand" font-size="17" font-weight="600" fill="#18181B">• 90.0% Top-3 Recall (0.67ms)</text>
             <text x="954" y="109" class="ex-hand" font-size="17" font-weight="600" fill="#18181B">• 100.0% ACL Block &amp; Span Prec</text>
-            <text x="954" y="130" class="ex-hand" font-size="17" font-weight="700" fill="#0F766E">• 59.7 → 100 Governance Lift</text>
+            <text x="954" y="130" class="ex-hand" font-size="17" font-weight="700" fill="#0F766E">• 59.7 → 100 Security Score</text>
           </g>
 
           <!-- Dashed Arrow: Lambda -> Plane 2 -->
@@ -1699,32 +1684,32 @@
     </section>
 
     <!-- =================================================================== -->
-    <!-- §03 · IMPLEMENTATION                                                -->
+    <!-- 03 · IMPLEMENTATION                                                 -->
     <!-- =================================================================== -->
     <section id="implementation" class="section" data-spy-section="implementation">
       <div class="section-header">
         <div>
-          <span class="section-kicker">§03 · Implementation</span>
-          <h2 class="section-title">Core Python Modules, Parsers &amp; Security Controls</h2>
+          <span class="section-kicker">03 · Implementation</span>
+          <h2 class="section-title">Implementation</h2>
           <p class="section-desc">
-            Every ingestion parser, pre-retrieval ACL predicate, Reciprocal Rank Fusion scorer, citation span verifier, and SHA-256 governance receipt chain in <code>quickspaces/</code> is implemented from scratch in pure Python.
+            File parsers, pre-retrieval access checks, Reciprocal Rank Fusion scoring, citation verification, and SHA-256 receipt chaining in <code>quickspaces/</code>.
           </p>
         </div>
       </div>
 
       <div class="dual-layer-grid">
-        <div class="intuition-card">
-          <span class="step-badge">PLAIN-ENGLISH INTUITION</span>
-          <h3>Why Four Specialized Parsers + Asset Max-Pooling Beat Generic Text Splitting</h3>
+        <div class="design-card">
+          <span class="step-badge">PARSING &amp; SCORE POOLING</span>
+          <h3>Format-Specific Parsers and Per-File Score Pooling</h3>
           <p>
-            If you chop a CSV spreadsheet into 500-character text blobs, the AI loses column headers and cannot sum or average a column reliably. Worse, a 40-turn meeting transcript creates 40 chunks while a KPI summary creates 2—so transcript chunks monopolize search results. QuickSpaces parses each file type into its native structure first (table rollups, KPI series, <code>[MM:SS]</code> turns, <code>§</code> sections) and scores each <em>parent file</em> by its strongest matching chunk so every modality gets a fair seat in prompt assembly.
+            Splitting a spreadsheet into fixed 500-character blocks drops column headers and breaks column totals. Meanwhile, a 40-turn meeting transcript produces 40 chunks while a dashboard summary produces 2, letting call chunks dominate top results. QuickSpaces parses each file format into its native structure first (column rollups, dashboard series, <code>[MM:SS]</code> speaker turns, <code>§</code> sections) and scores each parent file by its strongest matching chunk.
           </p>
         </div>
-        <div class="hood-card">
-          <span class="step-badge">UNDER THE HOOD · EXACT CODE, MATH &amp; DATA STRUCTURES</span>
-          <h3>Reciprocal Rank Fusion (<code>k=60</code>), Regex/Header PII Predicates &amp; SHA-256 Chaining</h3>
+        <div class="mechanics-card">
+          <span class="step-badge">SCORING &amp; AUDIT MECHANICS</span>
+          <h3>Reciprocal Rank Fusion (<code>k=60</code>), Column PII Masking &amp; SHA-256 Receipts</h3>
           <p>
-            In <code>quickspaces/hybrid_retrieval.py</code>, ACL-cleared chunks are scored by Okapi BM25 (<code>k1=1.5, b=0.75</code>) and L2-normalized character 3-gram TF vectors, then fused via <code>RRF(c) = 1/(60 + rank_bm25(c)) + 1/(60 + rank_cos(c))</code> and aggregated per asset via <code>score(A) = max_{c ∈ A} RRF(c)</code> (<code>0.67 ms</code> p50 / <code>1.15 ms</code> p95). Governance receipts chain canonical sorted JSON via <code>SHA256(prev_hash || canonical_payload)</code>.
+            In <code>quickspaces/hybrid_retrieval.py</code>, permission-cleared chunks are scored with Okapi BM25 (<code>k1=1.5, b=0.75</code>) and L2-normalized character 3-gram vectors, fused via <code>RRF(c) = 1/(60 + rank_bm25(c)) + 1/(60 + rank_cos(c))</code>, and pooled per file via <code>score(A) = max_{c ∈ A} RRF(c)</code> in <code>0.67 ms</code> p50 (<code>1.15 ms</code> p95). Security remediation receipts link canonical JSON payloads via <code>SHA256(prev_hash || canonical_payload)</code>.
           </p>
         </div>
       </div>
@@ -1732,18 +1717,18 @@
       <div class="module-grid">
         <div class="module-card">
           <div class="module-card-head">
-            <span>MODULE 01 · MULTI-MODAL INGEST &amp; PII</span>
+            <span>MODULE 01 · PARSERS &amp; PII MASKING</span>
             <span style="color:#5EEAD4;">quickspaces/multimodal_ingest.py · models.py</span>
           </div>
           <div class="module-card-body">
-            <h3>4-Modality Structured Parser &amp; Dynamic Column-Level PII Scanner</h3>
+            <h3>Four Format-Specific Parsers &amp; Dynamic Column Redaction</h3>
             <ul class="module-list">
-              <li><strong>CSV / Tabular Schema &amp; Rollup Engine:</strong> Infers numeric columns, pre-computes exact <code>sum</code>, <code>avg</code>, <code>min</code>, and <code>max</code> cohort rollups, and flags PII columns (<code>SSN</code>, <code>API_KEY</code>, <code>email</code>, <code>phone</code>) at ingestion time.</li>
-              <li><strong>Dynamic Viewer Redaction:</strong> Applies role-aware cell masking (<code>[REDACTED:SSN]</code>, <code>[REDACTED:API_KEY]</code>, masked email/phone) for non-admin principals without mutating raw admin lineage.</li>
-              <li><strong>WebVTT, QuickBI &amp; RFC Chunkers:</strong> Preserves <code>[MM:SS]</code> speaker attribution on <code>.vtt</code> calls, SQL warehouse lineage + KPI deltas on <code>.quickbi</code> dashboards, and <code>§2.1</code> section locators on <code>.md</code> RFCs.</li>
+              <li><strong>Spreadsheet Rollups &amp; PII Detection:</strong> Infers numeric columns, pre-computes exact <code>sum</code>, <code>avg</code>, <code>min</code>, and <code>max</code> totals, and flags sensitive columns (<code>SSN</code>, <code>API_KEY</code>, <code>email</code>, <code>phone</code>) on upload.</li>
+              <li><strong>Role-Aware Cell Redaction:</strong> Masks flagged cells on read (<code>[REDACTED:SSN]</code>, <code>[REDACTED:API_KEY]</code>, masked email and phone) for analysts while keeping the source table intact for authorized admins.</li>
+              <li><strong>Call, Dashboard &amp; Doc Parsers:</strong> Keeps <code>[MM:SS]</code> speaker timestamps on call transcripts, SQL lineage and KPI deltas on BI dashboards, and <code>§2.1</code> section anchors on Markdown design docs.</li>
             </ul>
             <div style="margin-top:auto; padding-top:0.45rem; display:flex; gap:0.4rem; flex-wrap:wrap;">
-              <span class="tag tag-pass">4 Modalities Unified</span>
+              <span class="tag tag-pass">4 File Formats</span>
               <span class="tag tag-soft">Live File / CSV Upload API</span>
             </div>
           </div>
@@ -1751,18 +1736,18 @@
 
         <div class="module-card">
           <div class="module-card-head">
-            <span>MODULE 02 · PRE-FILTER HYBRID RRF</span>
+            <span>MODULE 02 · ACCESS GATE &amp; HYBRID SEARCH</span>
             <span style="color:#93C5FD;">quickspaces/hybrid_retrieval.py · spaces_catalog.py</span>
           </div>
           <div class="module-card-body">
-            <h3>Zero-Leakage Pre-Retrieval ACL Gate + BM25/Cosine RRF + Asset MaxPool</h3>
+            <h3>Pre-Retrieval Permission Gate + BM25 / Cosine RRF + Per-File Pooling</h3>
             <ul class="module-list">
-              <li><strong>Pre-Retrieval Access Predicate:</strong> Evaluates caller clearance (<code>PUBLIC</code>, <code>INTERNAL</code>, <code>CONFIDENTIAL</code>) and regional residency (<code>NA</code>, <code>EMEA</code>, <code>APAC</code>) <em>prior</em> to candidate scoring—blocking <code>5/5</code> (<code>100.0%</code>) adversarial contractor &amp; analyst probes.</li>
-              <li><strong>Hybrid Lexical + Semantic RRF:</strong> Fuses Okapi BM25 term scores with character 3-gram cosine similarity via Reciprocal Rank Fusion (<code>k=60</code>) in <code>0.67 ms</code> p50 / <code>1.15 ms</code> p95.</li>
-              <li><strong>Asset-Level Max-Pooling:</strong> Aggregates chunk scores per parent asset with modality diversification, lifting Top-3 asset recall from <code>80.0%</code> (chunk-only) to <code>90.0%</code>.</li>
+              <li><strong>Up-Front Permission Check:</strong> Checks caller clearance (<code>PUBLIC</code>, <code>INTERNAL</code>, <code>CONFIDENTIAL</code>) and allowed regions (<code>NA</code>, <code>EMEA</code>, <code>APAC</code>) before scoring candidates, blocking <code>5/5</code> (<code>100.0%</code>) unauthorized access probes.</li>
+              <li><strong>Keyword + Semantic Rank Fusion:</strong> Combines Okapi BM25 exact-term matching with character 3-gram cosine similarity via Reciprocal Rank Fusion (<code>k=60</code>) in <code>0.67 ms</code> p50 / <code>1.15 ms</code> p95.</li>
+              <li><strong>Per-File Max-Pooling:</strong> Scores each file by its strongest chunk and balances file formats, raising top-3 recall from <code>80.0%</code> (flat chunks) to <code>90.0%</code>.</li>
             </ul>
             <div style="margin-top:auto; padding-top:0.45rem; display:flex; gap:0.4rem; flex-wrap:wrap;">
-              <span class="tag tag-pass">90.0% Top-3 Asset Recall</span>
+              <span class="tag tag-pass">90.0% Top-3 Recall</span>
               <span class="tag tag-accent">0.67 ms p50 / 1.15 ms p95</span>
             </div>
           </div>
@@ -1770,38 +1755,38 @@
 
         <div class="module-card">
           <div class="module-card-head">
-            <span>MODULE 03 · CITED COPILOT &amp; AUTO BI</span>
+            <span>MODULE 03 · CITED ANSWERS &amp; CHARTS</span>
             <span style="color:#DDD6FE;">quickspaces/grounded_agent.py · server.py</span>
           </div>
           <div class="module-card-body">
-            <h3>Amazon Bedrock Nova Cited Synthesis, Span Verifier &amp; Auto SVG BI Charts</h3>
+            <h3>Amazon Bedrock Q&amp;A, Citation Verification &amp; Automatic SVG Charts</h3>
             <ul class="module-list">
-              <li><strong>Cross-Modal Grounded Synthesis:</strong> Invokes live <strong>Amazon Bedrock (<code>us.amazon.nova-lite-v1:0</code>)</strong> via Converse API over only ACL-cleared, diversified Space chunks with strict inline <code>[C1]..[C5]</code> citation binding.</li>
-              <li><strong>Deterministic Citation Span Verifier:</strong> Cross-checks every emitted <code>[Ck]</code> reference against retrieved asset IDs and exact locators, achieving <code>100.0%</code> citation span precision across all 10 benchmark queries.</li>
-              <li><strong>Auto-Synthesized BI Visualization:</strong> Detects quantitative questions matching authorized tabular or QuickBI series and renders a crisp Neo-Brutalist SVG bar chart alongside the prose answer.</li>
+              <li><strong>Grounded Cross-File Answers:</strong> Calls <strong>Amazon Bedrock (<code>us.amazon.nova-lite-v1:0</code>)</strong> via the Converse API over permission-cleared chunks with inline <code>[C1]..[C5]</code> source markers.</li>
+              <li><strong>Citation Span Verifier:</strong> Checks every emitted <code>[Ck]</code> tag against retrieved file IDs and exact row, timestamp, or section locators, reaching <code>100.0%</code> citation precision across all 10 benchmark questions.</li>
+              <li><strong>Automatic Bar Charts:</strong> Detects quantitative questions matching authorized spreadsheet or dashboard series and renders an inline SVG comparison chart beside the answer.</li>
             </ul>
             <div style="margin-top:auto; padding-top:0.45rem; display:flex; gap:0.4rem; flex-wrap:wrap;">
-              <span class="tag tag-pass">100.0% Citation Span Precision</span>
-              <span class="tag tag-purple">us.amazon.nova-lite-v1:0</span>
+              <span class="tag tag-pass">100.0% Verified Citations</span>
+              <span class="tag tag-purple">Amazon Bedrock</span>
             </div>
           </div>
         </div>
 
         <div class="module-card">
           <div class="module-card-head">
-            <span>MODULE 04 · 5-RULE GOVERNANCE AGENT</span>
+            <span>MODULE 04 · WORKSPACE SECURITY AUDITOR</span>
             <span style="color:#FDE68A;">quickspaces/governance_agent.py</span>
           </div>
           <div class="module-card-body">
-            <h3>Autonomous 5-Control Onboarding Auditor &amp; SHA-256 WORM Ledger</h3>
+            <h3>Five-Rule Security Auditor &amp; Hash-Chained Compliance Log</h3>
             <ul class="module-list">
-              <li><strong>5 Enterprise Policy Controls:</strong> Continuously audits Spaces across <code>GOV-PII-01</code> (unmasked PII columns), <code>GOV-EXT-02</code> (external guest link drift), <code>GOV-RES-03</code> (<code>eu-central-1</code> KMS CMK residency pinning), <code>GOV-SLA-04</code> (BI owner freshness SLA), and <code>GOV-RET-05</code> (<code>retention:90d</code> transcript lifecycle).</li>
-              <li><strong>1-Click Autonomous Remediation:</strong> Remediates individual findings or entire Spaces in one atomic pass, lifting readiness across all 3 Spaces from <code>45/100</code>, <code>75/100</code>, and <code>59/100</code> to <code>100/100</code> (mean <code>59.7 → 100</code>).</li>
-              <li><strong>Tamper-Evident WORM Audit Trail:</strong> Emits canonical JSON receipts linked via <code>prev_chain_hash → sha256</code> for immutable compliance verification.</li>
+              <li><strong>Five Automated Security Checks:</strong> Scans workspaces for unmasked PII columns (<code>GOV-PII-01</code>), external guest share links (<code>GOV-EXT-02</code>), missing <code>eu-central-1</code> KMS encryption pins (<code>GOV-RES-03</code>), unverified dashboard SLAs (<code>GOV-SLA-04</code>), and missing 90-day call retention tags (<code>GOV-RET-05</code>).</li>
+              <li><strong>One-Click Remediation:</strong> Fixes individual findings or an entire workspace at once, raising readiness across the 3 workspaces from <code>45/100</code>, <code>75/100</code>, and <code>59/100</code> to <code>100/100</code> (mean <code>59.7 → 100</code>).</li>
+              <li><strong>Tamper-Evident Audit Trail:</strong> Appends canonical JSON receipts linked via <code>prev_chain_hash → sha256</code> so every policy change is verifiable.</li>
             </ul>
             <div style="margin-top:auto; padding-top:0.45rem; display:flex; gap:0.4rem; flex-wrap:wrap;">
-              <span class="tag tag-pass">59.7 → 100 Mean Readiness Lift</span>
-              <span class="tag tag-warn">SHA-256 Hash-Chained WORM</span>
+              <span class="tag tag-pass">59.7 → 100 Security Lift</span>
+              <span class="tag tag-warn">SHA-256 Audit Chain</span>
             </div>
           </div>
         </div>
@@ -1809,32 +1794,32 @@
     </section>
 
     <!-- =================================================================== -->
-    <!-- §04 · DESIGN TRADE-OFFS                                             -->
+    <!-- 04 · TRADE-OFFS                                                     -->
     <!-- =================================================================== -->
     <section id="why-it-wins" class="section" data-spy-section="why-it-wins">
       <div class="section-header">
         <div>
-          <span class="section-kicker">§04 · Design Trade-Offs</span>
-          <h2 class="section-title">Pre-Retrieval Governance &amp; Asset Max-Pooling vs. Standard RAG</h2>
+          <span class="section-kicker">04 · Trade-Offs</span>
+          <h2 class="section-title">Trade-Offs</h2>
           <p class="section-desc">
-            Engineering tradeoffs comparing post-filtered dense vector stores against pre-scoring access predicates, modality-aware rollup indexing, and automated policy remediation.
+            Comparing flat vector chunking and post-search permission filters against pre-search access predicates, per-file score pooling, and read-time column redaction.
           </p>
         </div>
       </div>
 
       <div class="dual-layer-grid">
-        <div class="intuition-card">
-          <span class="step-badge">PLAIN-ENGLISH INTUITION</span>
-          <h3>Why Filtering Before Search Prevents Both Leaks and "Empty Answers"</h3>
+        <div class="design-card">
+          <span class="step-badge">ACCESS CONTROL &amp; RECALL</span>
+          <h3>Pre-Search Access Filtering vs. Post-Search Filtering</h3>
           <p>
-            Think of a contractor searching for public pricing inside a folder that also holds 50 confidential board memos. If the search engine grabs the top 5 matches first and then deletes the ones the contractor isn't allowed to see, all 5 slots might be confidential memos—leaving 0 results even though the public pricing sheet was sitting right there at #6! Filtering permissions <em>first</em> guarantees zero data leaks AND complete answers from everything you are authorized to read.
+            Consider a contractor searching for public pricing inside a workspace that also holds 50 confidential board memos. If the search engine fetches the top 5 matches first and drops unauthorized hits second, all 5 slots can be confidential memos, returning zero results even when the public pricing sheet sits at rank 6. Filtering permissions first prevents leaks while preserving recall over authorized files.
           </p>
         </div>
-        <div class="hood-card">
-          <span class="step-badge">UNDER THE HOOD · EXACT CODE, MATH &amp; DATA STRUCTURES</span>
-          <h3><code>CLEARANCE_RANK</code> Lattice + Regional Set Intersection + Dynamic Cell Masking</h3>
+        <div class="mechanics-card">
+          <span class="step-badge">PREDICATE EVALUATION</span>
+          <h3><code>CLEARANCE_RANK</code> Comparison, Regional Set Overlap &amp; Read-Time Masking</h3>
           <p>
-            <code>can_access_asset(role, asset)</code> evaluates <code>CLEARANCE_RANK[role.clearance] &gt;= CLEARANCE_RANK[asset.classification]</code> and <code>bool(set(role.regions) &amp; set(asset.regions))</code> in <code>O(1)</code> per asset before building the posting list. For <code>INTERNAL</code> analysts viewing spreadsheets with flagged PII columns, cell values are transformed at serialization time without duplicating underlying rows.
+            <code>can_access_asset(role, asset)</code> checks <code>CLEARANCE_RANK[role.clearance] &gt;= CLEARANCE_RANK[asset.classification]</code> and <code>bool(set(role.regions) &amp; set(asset.regions))</code> in <code>O(1)</code> per file before building the candidate list. When an <code>INTERNAL</code> analyst views a spreadsheet with flagged PII columns, cells are masked on read instead of maintaining separate sanitized CSV copies.
           </p>
         </div>
       </div>
@@ -1844,35 +1829,35 @@
           <thead>
             <tr>
               <th style="width:19%;">Engineering Dimension</th>
-              <th style="width:26%;">Chunk-Only Dense Vector RAG</th>
-              <th style="width:25%;">Post-Retrieval Permission Filter</th>
-              <th style="width:30%; background:var(--accent-main); color:#FFFFFF;">QuickSpaces (Pre-Filter ACL + Hybrid RRF + WORM)</th>
+              <th style="width:26%;">Flat Chunk Vector Search</th>
+              <th style="width:25%;">Post-Search Permission Filter</th>
+              <th style="width:30%; background:var(--accent-main); color:#FFFFFF;">QuickSpaces (Pre-Filter + Hybrid RRF + Audit)</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td><strong>Cross-Role Data Security</strong></td>
-              <td><span class="tag tag-fail">Unsafe</span> Restricted EMEA transcripts and raw PII columns enter prompt context unguarded.</td>
-              <td><span class="tag tag-warn">Top-K Starvation</span> Unauthorized top-<em>K</em> hits are dropped after scoring, leaving authorized public docs unretrieved.</td>
-              <td class="winner-col"><span class="tag tag-pass">100.0% Blocked</span> Enforces tenant, region, and clearance <em>before</em> BM25/cosine scoring (<code>5/5</code> adversarial probes blocked; full recall on authorized docs).</td>
+              <td><span class="tag tag-fail">Unsafe</span> Restricted transcripts and raw PII columns can enter the prompt context.</td>
+              <td><span class="tag tag-warn">Empty Results</span> Restricted hits consume top-<em>K</em> slots and get dropped afterward, starving authorized files.</td>
+              <td class="winner-col"><span class="tag tag-pass">100.0% Blocked</span> Checks clearance and region <em>before</em> scoring (<code>5/5</code> probes blocked; full recall on authorized files).</td>
             </tr>
             <tr>
-              <td><strong>Multi-Modal Recall</strong></td>
-              <td><span class="tag tag-warn">80.0% Recall</span> Verbose <code>.vtt</code> call chunks crowd out compact CSV cohort tables and BI KPI cards.</td>
-              <td><span class="tag tag-warn">Lexical Misses</span> Pure embeddings miss exact SKU/RFC identifiers (<code>RFC-042</code>, <code>v4.12.2</code>, <code>EWR-7</code>).</td>
-              <td class="winner-col"><span class="tag tag-pass">90.0% Recall</span> Hybrid BM25 + 3-gram cosine RRF + Asset Max-Pooling + modality diversification in <code>0.67 ms</code> p50 / <code>1.15 ms</code> p95.</td>
+              <td><strong>Cross-Format Recall</strong></td>
+              <td><span class="tag tag-warn">80.0% Recall</span> Long call transcripts crowd out compact spreadsheets and dashboard cards.</td>
+              <td><span class="tag tag-warn">Exact-ID Misses</span> Pure embeddings miss exact codes and versions (<code>RFC-042</code>, <code>v4.12.2</code>, <code>EWR-7</code>).</td>
+              <td class="winner-col"><span class="tag tag-pass">90.0% Recall</span> Hybrid BM25 + 3-gram cosine RRF + per-file pooling in <code>0.67 ms</code> p50 / <code>1.15 ms</code> p95.</td>
             </tr>
             <tr>
-              <td><strong>Tabular PII Protection</strong></td>
-              <td><span class="tag tag-fail">All-or-Nothing</span> Either exposes raw SSNs/API keys or blocks the entire spreadsheet from analysts.</td>
-              <td><span class="tag tag-warn">Static Copies</span> Requires maintaining duplicated sanitized CSV exports that drift from live numbers.</td>
-              <td class="winner-col"><span class="tag tag-pass">Dynamic Redaction</span> Single source table; auto-masks <code>SSN</code>, <code>API_KEY</code>, <code>email</code>, and <code>phone</code> columns dynamically per viewer role.</td>
+              <td><strong>Spreadsheet PII Handling</strong></td>
+              <td><span class="tag tag-fail">All-or-Nothing</span> Either exposes raw SSNs and API keys or hides the entire spreadsheet from analysts.</td>
+              <td><span class="tag tag-warn">Duplicate Exports</span> Requires maintaining separate sanitized CSV copies that quickly go stale.</td>
+              <td class="winner-col"><span class="tag tag-pass">Read-Time Masking</span> Keeps one table and masks <code>SSN</code>, <code>API_KEY</code>, <code>email</code>, and <code>phone</code> cells per viewer role.</td>
             </tr>
             <tr>
-              <td><strong>Workspace Governance</strong></td>
-              <td><span class="tag tag-fail">Manual Ticket</span> Security teams audit KMS residency, guest links, and retention tags by spreadsheet.</td>
-              <td><span class="tag tag-warn">Read-Only Lint</span> Flags drift (<code>59.7/100</code>) without remediating connector or KMS settings.</td>
-              <td class="winner-col"><span class="tag tag-pass">59.7 → 100 Auto</span> 5-Rule Onboarding Agent auto-applies PII locks, EU KMS pins, and <code>retention:90d</code> tags with SHA-256 receipts.</td>
+              <td><strong>Workspace Security Hygiene</strong></td>
+              <td><span class="tag tag-fail">Manual Reviews</span> Security teams chase down guest links, encryption keys, and retention rules by hand.</td>
+              <td><span class="tag tag-warn">Warnings Only</span> Reports drift (<code>59.7/100</code>) without fixing underlying settings.</td>
+              <td class="winner-col"><span class="tag tag-pass">59.7 → 100 Auto</span> Five-rule auditor applies PII locks, EU KMS keys, and 90-day retention with SHA-256 receipts.</td>
             </tr>
           </tbody>
         </table>
@@ -1880,79 +1865,76 @@
 
       <div class="takeaway-grid">
         <div class="takeaway-card">
-          <span class="step-badge">PRINCIPLE 01 · ZERO-LEAKAGE RETRIEVAL</span>
-          <h3>Access Control Must Run Before Candidate Scoring, Never After</h3>
+          <span class="step-badge">PRINCIPLE 01 · PRE-SEARCH ISOLATION</span>
+          <h3>Filter Permissions Before Scoring Candidates, Never After</h3>
           <p>
-            Pushing tenant, regional residency (<code>NA</code>/<code>EMEA</code>), and clearance predicates into the retrieval pre-filter guarantees both <code>100.0%</code> adversarial block rate (<code>5/5</code> probes) and zero top-<em>K</em> starvation for lower-clearance roles querying <code>PUBLIC</code> or <code>INTERNAL</code> assets.
+            Evaluating clearance tier and regional residency ahead of candidate ranking blocks <code>100.0%</code> of unauthorized probes (<code>5/5</code>) while ensuring lower-clearance users still get complete answers from public and internal documents.
           </p>
         </div>
         <div class="takeaway-card">
-          <span class="step-badge">PRINCIPLE 02 · MODALITY-AWARE RANKING</span>
-          <h3>Preserve Native Structure &amp; Pool Chunk Scores at the Asset Boundary</h3>
+          <span class="step-badge">PRINCIPLE 02 · FORMAT-AWARE RANKING</span>
+          <h3>Keep Native File Structure and Pool Scores at the File Level</h3>
           <p>
-            Pre-computing CSV numeric rollups, preserving <code>[MM:SS]</code> speaker turns, and max-pooling BM25 + cosine RRF chunk scores per asset prevents multi-chunk call transcripts from drowning out high-signal spreadsheets (<code>80.0% → 90.0%</code> Top-3 recall in <code>0.67 ms</code> p50).
+            Pre-computing spreadsheet column totals, preserving <code>[MM:SS]</code> call timestamps, and pooling chunk scores per file stops long recordings from burying high-signal tables (<code>80.0% → 90.0%</code> top-3 recall in <code>0.67 ms</code> p50).
           </p>
         </div>
         <div class="takeaway-card">
-          <span class="step-badge">PRINCIPLE 03 · CONTINUOUS POLICY REMEDIATION</span>
-          <h3>Pair Self-Service Ingestion with Autonomous Governance Guardrails</h3>
+          <span class="step-badge">PRINCIPLE 03 · AUTOMATED HYGIENE</span>
+          <h3>Pair Self-Serve Uploads with One-Click Security Remediation</h3>
           <p>
-            Enterprise users upload sensitive files daily. Scanning PII columns at ingest time and running a 5-rule autonomous remediation agent (<code>59.7 → 100</code> mean readiness across 3 Spaces) turns compliance from a multi-week manual review into a 1-click SHA-256 audited operation.
+            Teams upload sensitive spreadsheets and recordings constantly. Scanning columns on ingest and enforcing five workspace controls automatically (<code>59.7 → 100</code> across 3 workspaces) replaces manual ticket queues with verifiable SHA-256 receipts.
           </p>
         </div>
       </div>
     </section>
 
     <!-- =================================================================== -->
-    <!-- §05 · INTERACTIVE STUDIO                                            -->
+    <!-- 05 · LIVE DEMO                                                      -->
     <!-- =================================================================== -->
     <section id="live-sandboxes" class="tabs-wrapper" data-spy-section="live-sandboxes">
       <div class="section-header" style="margin-bottom:0.9rem;">
         <div>
-          <span class="section-kicker">§05 · Interactive Studio</span>
-          <h2 class="section-title">Interactive CloudFront <code>/api/*</code> + Amazon Bedrock Nova Studios</h2>
+          <span class="section-kicker">05 · Live Demo</span>
+          <h2 class="section-title">Live Demo</h2>
         </div>
       </div>
-      <div class="tab-bar" role="tablist" aria-label="QuickSpaces Interactive Studios">
+      <div class="tab-bar" role="tablist" aria-label="QuickSpaces Interactive Demo Tabs">
         <button type="button" class="tab-btn active" data-tab="spaces-studio" role="tab" aria-selected="true" onclick="switchTab('spaces-studio')">
-          <span class="tab-btn-eyebrow">Sandbox 01 · Spaces &amp; PII</span>
-          <span class="tab-btn-title">Enterprise Spaces, PII Masking &amp; Ingest</span>
-          <span class="tab-btn-metric">3 Spaces · Dynamic [REDACTED] · Custom CSV</span>
+          <span class="tab-btn-eyebrow">01 · Files &amp; Permissions</span>
+          <span class="tab-btn-title">Browse Files &amp; Mask PII</span>
+          <span class="tab-btn-metric">3 Workspaces · Role Switcher · Upload CSV</span>
         </button>
         <button type="button" class="tab-btn" data-tab="ask-ai" role="tab" aria-selected="false" onclick="switchTab('ask-ai')">
-          <span class="tab-btn-eyebrow">Sandbox 02 · Bedrock Nova</span>
-          <span class="tab-btn-title">Ask Quick AI &amp; Auto BI Chart Studio</span>
-          <span class="tab-btn-metric">100.0% Citation Span Precision · SVG BI</span>
+          <span class="tab-btn-eyebrow">02 · Grounded Q&amp;A</span>
+          <span class="tab-btn-title">Ask Questions &amp; Generate Charts</span>
+          <span class="tab-btn-metric">Amazon Bedrock · 100% Verified Citations</span>
         </button>
         <button type="button" class="tab-btn" data-tab="governance-agent" role="tab" aria-selected="false" onclick="switchTab('governance-agent')">
-          <span class="tab-btn-eyebrow">Sandbox 03 · 5-Rule Audit</span>
-          <span class="tab-btn-title">Autonomous Governance Agent (59.7 → 100)</span>
-          <span class="tab-btn-metric">KMS + ACL + PII + WORM SHA-256</span>
+          <span class="tab-btn-eyebrow">03 · Security Audit</span>
+          <span class="tab-btn-title">Audit &amp; Fix Security Rules</span>
+          <span class="tab-btn-metric">59.7 → 100 Score · SHA-256 Audit Log</span>
         </button>
         <button type="button" class="tab-btn" data-tab="benchmarks" role="tab" aria-selected="false" onclick="switchTab('benchmarks')">
-          <span class="tab-btn-eyebrow">Sandbox 04 · Evaluation</span>
-          <span class="tab-btn-title">Multi-Modal &amp; ACL Benchmark Suite</span>
-          <span class="tab-btn-metric">90.0% Recall · 100.0% ACL Block · 0.67ms p50</span>
+          <span class="tab-btn-eyebrow">04 · Benchmarks</span>
+          <span class="tab-btn-title">Benchmark Results</span>
+          <span class="tab-btn-metric">90.0% Recall · 0 Leaks · 0.67 ms Search</span>
         </button>
       </div>
 
       <!-- ================================================================ -->
-      <!-- TAB 1: ENTERPRISE SPACES, ROLE-BASED PII MASKING & INGESTION     -->
+      <!-- TAB 1: BROWSE FILES & MASK PII                                   -->
       <!-- ================================================================ -->
       <div id="panel-spaces-studio" class="tab-panel active" role="tabpanel">
-        <div class="sandbox-guide-banner">
-          <strong class="guide-title">🧭 How to Try This Sandbox (What to Click &amp; What Happens)</strong>
-          <strong>1. Test Dynamic PII Masking:</strong> Click <em>"🔒 View PII Redaction as Finance Analyst"</em> on the left—watch <code>signatory_ssn</code>, <code>connector_api_key</code>, and executive emails turn into <code>[REDACTED]</code> badges in the spreadsheet while revenue numbers stay visible.
-          <strong>2. Test Contractor ACL Blocking:</strong> Click <em>"🛡️ Probe Confidential Escalation as Contractor"</em>—watch confidential EMEA files lock immediately before search.
-          <strong>3. Upload Your Own File:</strong> Click <em>"+ Ingest Custom Document / CSV"</em> → <em>"⚡ Parse, Scan PII &amp; Ingest Asset"</em> to parse and index custom data live via <code>POST /api/spaces/&lt;id&gt;/ingest</code>.
+        <div class="demo-note-banner">
+          Switch between <strong>VP Engineering</strong>, <strong>Finance Analyst</strong>, and <strong>External Contractor</strong> on the left to inspect read-time column redaction and pre-search file locks, or upload a custom CSV, call transcript, or Markdown file.
         </div>
         <div class="sim-header">
           <div>
-            <h2 class="sim-title">Enterprise Spaces, Role-Based PII Masking &amp; Custom Asset Ingestion</h2>
-            <p class="sim-desc">Switch caller identity between <code>vp_admin</code>, <code>finance_analyst</code>, and <code>external_contractor</code> to watch dynamic column redaction (<code>[REDACTED:SSN]</code>, <code>[REDACTED:API_KEY]</code>, masked email/phone) and pre-retrieval ACL withholding live.</p>
+            <h2 class="sim-title">Browse Team Workspaces, Test Role-Based PII Masking &amp; Upload Files</h2>
+            <p class="sim-desc">Compare what an executive admin, a regional finance analyst, and an external contractor can see across the same workspace without duplicating underlying files.</p>
           </div>
           <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-            <button type="button" class="btn btn-accent" onclick="toggleIngestDrawer()">+ Ingest Custom Document / CSV</button>
+            <button type="button" class="btn btn-accent" onclick="toggleIngestDrawer()">+ Upload Custom File / CSV</button>
             <button type="button" class="btn btn-secondary" onclick="resetWorkspaceLive()">↺ Reset Workspace</button>
           </div>
         </div>
@@ -1961,8 +1943,8 @@
         <div id="ingestDrawer" class="card" style="display:none; margin-bottom:1.25rem; background:var(--bg-subtle);">
           <div style="display:flex; justify-content:space-between; align-items:center; gap:0.75rem; flex-wrap:wrap; margin-bottom:0.85rem;">
             <div>
-              <h3 style="font-size:1.08rem; font-weight:800;">Ingest Custom Spreadsheet (<code>.csv</code>), Call Transcript (<code>.vtt</code>) or RFC (<code>.md</code>)</h3>
-              <p class="mono" style="font-size:0.71rem; color:var(--ink-muted); margin-top:0.2rem;">POST /api/spaces/&lt;space_id&gt;/ingest — runs schema parsing, automatic PII column scan, and hybrid RRF indexing.</p>
+              <h3 style="font-size:1.08rem; font-weight:800;">Upload a Custom Spreadsheet, Call Transcript, or Design Doc</h3>
+              <p class="mono" style="font-size:0.71rem; color:var(--ink-muted); margin-top:0.2rem;">POST /api/spaces/&lt;space_id&gt;/ingest — parses structure, scans sensitive columns, and indexes chunks.</p>
             </div>
             <div style="display:flex; gap:0.45rem; flex-wrap:wrap;">
               <button type="button" class="btn btn-secondary" onclick="loadSampleIngest('csv')">Load Sample CSV (with SSN &amp; API_KEY)</button>
@@ -2022,35 +2004,35 @@ AlpineRe-Zurich,27450,1105,388-19-6520,sk-qs-live-72cb39de12a9,elena.rossi@acmec
           <!-- Left Column: Space & Role Selector + Hybrid Search -->
           <div class="card">
             <div class="control-label">
-              <span>1. Active Caller Identity &amp; Clearance Policy</span>
+              <span>1. Caller Role &amp; Access Level</span>
               <span class="tag tag-accent" id="activeRoleTag">vp_admin</span>
             </div>
             <select id="roleSelect" onchange="changeRole(this.value)" style="margin-bottom:0.55rem;">
-              <option value="vp_admin">vp_admin · VP Engineering (Full NA+EMEA CONFIDENTIAL · Raw PII)</option>
-              <option value="na_analyst">finance_analyst (na_analyst) · Finance/RevOps Analyst (INTERNAL · PII Redacted)</option>
-              <option value="external_partner">external_contractor (external_partner) · External Contractor (PUBLIC Only)</option>
+              <option value="vp_admin">VP Engineering (vp_admin · Full Access · Raw PII)</option>
+              <option value="na_analyst">Finance Analyst (na_analyst · Internal Only · PII Masked)</option>
+              <option value="external_partner">External Contractor (external_partner · Public Files Only)</option>
             </select>
             <div id="rolePolicyBanner" class="verdict-banner verdict-teal" style="padding:0.65rem 0.8rem; font-size:0.8rem; margin-bottom:1rem;"></div>
 
             <div class="control-label">
-              <span>2. Enterprise Team Spaces (3 Governed Spaces)</span>
+              <span>2. Team Workspaces (3 Governed Spaces)</span>
             </div>
             <div class="space-btn-list" id="spacesList"></div>
 
             <div class="control-label">
-              <span>3. Quick Role &amp; Security Probes</span>
+              <span>3. One-Click Role &amp; Security Scenarios</span>
             </div>
             <div style="display:flex; flex-direction:column; gap:0.45rem;">
               <button type="button" class="btn btn-secondary" style="justify-content:space-between;" onclick="runQuickScenario('pii')">
-                <span>🔒 View PII Redaction as Finance Analyst</span>
+                <span>🔒 View Masked PII Columns as Finance Analyst</span>
                 <span class="mono" style="font-size:0.68rem;">[REDACTED] →</span>
               </button>
               <button type="button" class="btn btn-secondary" style="justify-content:space-between;" onclick="runQuickScenario('contractor')">
-                <span>🛡️ Probe Confidential Escalation as Contractor</span>
-                <span class="mono" style="font-size:0.68rem;">ACL BLOCK →</span>
+                <span>🛡️ Test Confidential File Block as Contractor</span>
+                <span class="mono" style="font-size:0.68rem;">BLOCKED →</span>
               </button>
               <button type="button" class="btn btn-secondary" style="justify-content:space-between;" onclick="runQuickScenario('bedrock')">
-                <span>⚡ Cross-Modal Bedrock Nova Synthesis</span>
+                <span>⚡ Ask Cross-File Question on Amazon Bedrock</span>
                 <span class="mono" style="font-size:0.68rem;">Tab 02 →</span>
               </button>
             </div>
@@ -2068,13 +2050,13 @@ AlpineRe-Zurich,27450,1105,388-19-6520,sk-qs-live-72cb39de12a9,elena.rossi@acmec
 
             <!-- Hybrid Search + Modality Filter -->
             <div style="display:grid; grid-template-columns:1fr auto; gap:0.55rem; margin-bottom:0.65rem;">
-              <input type="search" id="spaceSearchInput" placeholder="Hybrid BM25 + Vector RRF search across sheets, BI, calls &amp; RFCs..." oninput="debouncedSpaceSearch(this.value)" />
+              <input type="search" id="spaceSearchInput" placeholder="Search spreadsheets, dashboards, calls, and design docs..." oninput="debouncedSpaceSearch(this.value)" />
               <select id="modalityFilterSelect" onchange="changeModalityFilter(this.value)" style="width:auto; min-width:155px;">
-                <option value="all">All 4 Modalities</option>
-                <option value="table">Spreadsheets (.csv)</option>
-                <option value="bi_dashboard">BI Dashboards</option>
-                <option value="transcript">Call Audio (.vtt)</option>
-                <option value="document">RFC Docs (.md)</option>
+                <option value="all">All File Types</option>
+                <option value="table">Spreadsheets</option>
+                <option value="bi_dashboard">Dashboards</option>
+                <option value="transcript">Call Recordings</option>
+                <option value="document">Design Docs</option>
                 <option value="favorites">★ Starred Only</option>
               </select>
             </div>
@@ -2091,18 +2073,16 @@ AlpineRe-Zurich,27450,1105,388-19-6520,sk-qs-live-72cb39de12a9,elena.rossi@acmec
       </div>
 
       <!-- ================================================================ -->
-      <!-- TAB 2: ASK QUICK AI — BEDROCK NOVA CITED Q&A + AUTO BI STUDIO    -->
+      <!-- TAB 2: ASK QUESTIONS & GENERATE CHARTS                           -->
       <!-- ================================================================ -->
       <div id="panel-ask-ai" class="tab-panel" role="tabpanel">
-        <div class="sandbox-guide-banner">
-          <strong class="guide-title">🧭 How to Try This Sandbox (What to Click &amp; What Happens)</strong>
-          <strong>1. Run Cross-Modal Bedrock Q&amp;A:</strong> Click any preset question on the left (or type your own) and hit <em>"⚡ Ask Quick AI"</em>—Amazon Bedrock (<code>us.amazon.nova-lite-v1:0</code>) synthesizes spreadsheets, QuickBI metrics, <code>[MM:SS]</code> call transcripts, and RFCs into one verified response with an auto-generated SVG bar chart.
-          <strong>2. Try the Adversarial Probe:</strong> Switch <em>Caller Role</em> to <code>external_contractor</code> and click the <code>🛡️ Adversarial Probe</code> preset to verify that restricted SSNs and confidential EMEA ARR numbers are blocked pre-retrieval.
+        <div class="demo-note-banner">
+          Pick a preset question or write your own, then switch the <strong>Caller Role</strong> between VP Admin and External Contractor to see how pre-search access filtering changes which files, numbers, and charts Amazon Bedrock is allowed to use.
         </div>
         <div class="sim-header">
           <div>
-            <h2 class="sim-title">Ask Quick AI — Bedrock Nova Cited Q&amp;A + Auto BI Chart Studio</h2>
-            <p class="sim-desc">Executes pre-retrieval ACL filtering, diversifies top-5 chunks across modalities via Reciprocal Rank Fusion, invokes live Amazon Bedrock (<code>us.amazon.nova-lite-v1:0</code>), verifies <code>[C1..C5]</code> citations, and synthesizes a Neo-Brutalist SVG BI bar chart.</p>
+            <h2 class="sim-title">Ask Questions Across Files &amp; Generate Cited Charts</h2>
+            <p class="sim-desc">Filters workspace files by caller permissions first, retrieves the strongest spans across spreadsheets, dashboards, calls, and docs, answers via Amazon Bedrock with verified <code>[C1..C5]</code> citations, and renders an SVG bar chart when quantitative series match.</p>
           </div>
           <span class="tag tag-accent" id="askContextBadge">Space: space-q3-cloud-arr · Role: vp_admin</span>
         </div>
@@ -2112,54 +2092,54 @@ AlpineRe-Zurich,27450,1105,388-19-6520,sk-qs-live-72cb39de12a9,elena.rossi@acmec
           <div class="card">
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.65rem; margin-bottom:0.85rem;">
               <div>
-                <div class="control-label"><span>Target Space</span></div>
+                <div class="control-label"><span>Workspace</span></div>
                 <select id="askSpaceSelect" onchange="changeSpace(this.value)"></select>
               </div>
               <div>
-                <div class="control-label"><span>Caller Role (ACL Gate)</span></div>
+                <div class="control-label"><span>Caller Role</span></div>
                 <select id="askRoleSelect" onchange="changeRole(this.value)">
-                  <option value="vp_admin">vp_admin (Full CONFIDENTIAL)</option>
-                  <option value="na_analyst">finance_analyst (NA INTERNAL)</option>
-                  <option value="external_partner">external_contractor (PUBLIC Only)</option>
+                  <option value="vp_admin">VP Engineering (Full Access)</option>
+                  <option value="na_analyst">Finance Analyst (NA Internal)</option>
+                  <option value="external_partner">External Contractor (Public Only)</option>
                 </select>
               </div>
             </div>
 
-            <div class="control-label"><span>Preset Executive &amp; Adversarial Questions</span></div>
+            <div class="control-label"><span>Sample Questions &amp; Access Probes</span></div>
             <div id="presetQuestionsBox" style="display:flex; flex-direction:column; gap:0.45rem; margin-bottom:0.9rem;"></div>
 
-            <div class="control-label"><span>Custom Space-Grounded Question</span></div>
+            <div class="control-label"><span>Your Question</span></div>
             <textarea id="askQuestionInput" rows="3" style="margin-bottom:0.75rem;">Why did EMEA Enterprise net retention dip in Q3, how much ARR contracted, and when does the SCIM fix ship?</textarea>
 
             <button type="button" class="btn btn-accent" id="askSubmitBtn" style="width:100%; justify-content:center; padding:0.68rem 1rem; font-size:0.88rem;" onclick="runAskQuickAI()">
-              ⚡ Ask Quick AI (Bedrock Nova /api/*)
+              ⚡ Ask Quick AI (Live on Amazon Bedrock)
             </button>
 
             <div style="margin-top:1.1rem;">
               <div class="control-label">
-                <span>Retrieved &amp; Verified Citation Cards (Click to Inspect Source)</span>
+                <span>Verified Citations (Click Any Card to Open Source File)</span>
                 <span class="mono" style="font-size:0.69rem;" id="citationCountLabel">4 citations</span>
               </div>
               <div id="citationsListBox" style="display:flex; flex-direction:column; gap:0.55rem;"></div>
             </div>
           </div>
 
-          <!-- Right: Cited Answer + Neo-Brutalist SVG BI Chart + Step Latency -->
+          <!-- Right: Cited Answer + SVG BI Chart + Step Latency -->
           <div class="card">
             <div id="askTelemetryBanner" class="verdict-banner verdict-allow"></div>
 
             <div style="background:var(--bg-paper); border:2px solid var(--border); padding:1rem 1.1rem; margin-bottom:1rem;">
               <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.55rem;">
-                <span class="mono" style="font-size:0.72rem; font-weight:700;">GROUNDED SYNTHESIS RESPONSE</span>
+                <span class="mono" style="font-size:0.72rem; font-weight:700;">CITED ANSWER</span>
                 <span class="tag tag-pass" id="verifyPrecisionBadge">100.0% Citation Span Verified</span>
               </div>
               <div id="askAnswerBody" style="font-size:0.9rem; line-height:1.62;"></div>
             </div>
 
-            <!-- Auto-Synthesized Neo-Brutalist SVG BI Chart -->
+            <!-- Auto-Synthesized SVG BI Chart -->
             <div style="border:2px solid var(--border); background:var(--bg-card); padding:0.95rem 1rem; margin-bottom:1rem;">
               <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.6rem;">
-                <span class="mono" style="font-size:0.72rem; font-weight:700;" id="svgChartTitle">AUTO-SYNTHESIZED BI BAR CHART</span>
+                <span class="mono" style="font-size:0.72rem; font-weight:700;" id="svgChartTitle">GENERATED COMPARISON CHART</span>
                 <span class="tag tag-soft" id="svgChartSourceTag">Tabular Lineage</span>
               </div>
               <div id="svgBiChartWrap"></div>
@@ -2168,7 +2148,7 @@ AlpineRe-Zurich,27450,1105,388-19-6520,sk-qs-live-72cb39de12a9,elena.rossi@acmec
             <!-- Step Latency & Token Telemetry -->
             <div>
               <div class="control-label">
-                <span>Pipeline Step Latency &amp; Token Breakdown</span>
+                <span>Step-by-Step Latency Breakdown</span>
                 <span class="mono" style="font-size:0.7rem;" id="totalWallMsLabel">Total: 412.6 ms</span>
               </div>
               <div class="bar-group" id="askLatencyBars"></div>
@@ -2178,37 +2158,34 @@ AlpineRe-Zurich,27450,1105,388-19-6520,sk-qs-live-72cb39de12a9,elena.rossi@acmec
       </div>
 
       <!-- ================================================================ -->
-      <!-- ================================================================ -->
-      <!-- TAB 3: 5-RULE AUTONOMOUS GOVERNANCE & ONBOARDING AGENT           -->
+      <!-- TAB 3: AUDIT & FIX SECURITY RULES                                -->
       <!-- ================================================================ -->
       <div id="panel-governance-agent" class="tab-panel" role="tabpanel">
-        <div class="sandbox-guide-banner">
-          <strong class="guide-title">🧭 How to Try This Sandbox (What to Click &amp; What Happens)</strong>
-          <strong>1. Inspect Space Drift:</strong> Switch between the 3 Enterprise Spaces in the dropdown (<code>45/100</code>, <code>75/100</code>, <code>59/100</code>; mean <code>59.7/100</code>) to see open violations across PII column locks, guest share links, EU KMS residency pins, BI SLAs, and 90-day transcript retention.
-          <strong>2. Auto-Remediate &amp; Verify WORM Receipt:</strong> Click <em>"⚡ Auto-Remediate All 5 Controls"</em> (or fix individual rules) to enforce every control (<code>100/100</code>) and inspect the newly appended SHA-256 hash-chained receipt on the right.
+        <div class="demo-note-banner">
+          Select any of the 3 workspaces (starting scores <code>45/100</code>, <code>75/100</code>, and <code>59/100</code>; average <code>59.7/100</code>) to inspect open security gaps and apply fixes individually or in one pass with a hash-chained SHA-256 audit receipt.
         </div>
         <div class="sim-header">
           <div>
-            <h2 class="sim-title">5-Rule Autonomous Governance &amp; Security Onboarding Agent (59.7 → 100 Mean Lift)</h2>
-            <p class="sim-desc">Continuously audits enterprise Spaces across 5 mandatory security controls—column-level PII masking, external guest link revocation, EU KMS CMK encryption, cross-space ACL/SLA attestation, and S3 Object Lock WORM retention—remediating policy drift in 1 click.</p>
+            <h2 class="sim-title">Workspace Security Auditor &amp; One-Click Remediation (59.7 → 100)</h2>
+            <p class="sim-desc">Audits workspaces across five controls (column PII masking, external guest link removal, European KMS encryption pinning, dashboard freshness SLAs, and 90-day call retention) and records each fix in an immutable receipt chain.</p>
           </div>
           <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-            <button type="button" class="btn btn-secondary" onclick="auditSpaceLive()">🔍 Audit Space</button>
-            <button type="button" class="btn btn-accent" id="remediateAllBtn" onclick="remediateAllGovernance()">⚡ Auto-Remediate All 5 Controls (59.7 → 100)</button>
-            <button type="button" class="btn btn-secondary" onclick="resetWorkspaceLive()">↺ Reset Drift Baseline</button>
+            <button type="button" class="btn btn-secondary" onclick="auditSpaceLive()">🔍 Re-Run Audit</button>
+            <button type="button" class="btn btn-accent" id="remediateAllBtn" onclick="remediateAllGovernance()">⚡ Fix All 5 Security Controls (59.7 → 100)</button>
+            <button type="button" class="btn btn-secondary" onclick="resetWorkspaceLive()">↺ Reset Baseline</button>
           </div>
         </div>
 
         <div class="grid-2">
           <!-- Left: Readiness Gauge + 5 Controls Checklist -->
           <div class="card">
-            <div class="control-label"><span>Target Space under Governance Audit</span></div>
+            <div class="control-label"><span>Workspace Under Audit</span></div>
             <select id="govSpaceSelect" onchange="changeSpace(this.value)" style="margin-bottom:0.9rem;"></select>
 
             <div id="govScoreBanner" class="verdict-banner verdict-warn"></div>
 
             <div class="control-label" style="margin-top:0.6rem;">
-              <span>5 Enterprise Governance Controls Checklist</span>
+              <span>Five Security Controls</span>
               <span class="mono" style="font-size:0.7rem;" id="govPassingCountLabel">0 / 5 Passing</span>
             </div>
             <div id="govFiveRulesList" style="display:flex; flex-direction:column; gap:0.65rem; margin-top:0.5rem;"></div>
@@ -2217,13 +2194,13 @@ AlpineRe-Zurich,27450,1105,388-19-6520,sk-qs-live-72cb39de12a9,elena.rossi@acmec
           <!-- Right: Open Findings + SHA-256 Hash-Chained WORM Audit Log -->
           <div class="card">
             <div class="control-label">
-              <span>Active Policy Drift Findings &amp; Per-Control Remediation</span>
+              <span>Open Security Findings &amp; Per-Rule Fixes</span>
               <span class="tag tag-warn" id="openFindingsBadge">5 Open Violations</span>
             </div>
             <div id="govFindingsBox" style="display:flex; flex-direction:column; gap:0.6rem; margin-bottom:1.1rem;"></div>
 
             <div class="code-header">
-              <span>S3 Object Lock WORM &amp; SHA-256 Hash-Chained Audit Receipt Log</span>
+              <span>SHA-256 Hash-Chained Compliance Receipt Log</span>
               <span style="color:var(--pass);">IMMUTABLE LEDGER</span>
             </div>
             <pre class="code-box" id="govAuditReceiptBox"></pre>
@@ -2232,42 +2209,41 @@ AlpineRe-Zurich,27450,1105,388-19-6520,sk-qs-live-72cb39de12a9,elena.rossi@acmec
       </div>
 
       <!-- ================================================================ -->
-      <!-- TAB 4: §06 · BENCHMARKS                                          -->
+      <!-- TAB 4: 06 · BENCHMARKS                                           -->
       <!-- ================================================================ -->
       <div id="panel-benchmarks" class="tab-panel" role="tabpanel">
-        <div class="sandbox-guide-banner">
-          <strong class="guide-title">🧭 How to Read &amp; Reproduce These Benchmarks</strong>
-          Every number below comes directly from running <code>PYTHONPATH=. python3 benchmarks/run_benchmarks.py</code> → <code>benchmarks/latest_results.json</code> across <code>10</code> multi-modal Space queries, <code>5</code> adversarial role/clearance leakage probes, and <code>3</code> enterprise Spaces.
+        <div class="demo-note-banner">
+          All metrics below come directly from running <code>PYTHONPATH=. python3 benchmarks/run_benchmarks.py</code> (saved in <code>benchmarks/latest_results.json</code>) across <code>10</code> cross-file questions, <code>5</code> unauthorized contractor and analyst probes, and <code>3</code> workspaces.
         </div>
         <div class="dual-layer-grid">
-          <div class="intuition-card">
-            <span class="step-badge">PLAIN-ENGLISH INTUITION</span>
-            <h3>What the Five Headline Numbers Prove</h3>
+          <div class="design-card">
+            <span class="step-badge">SUMMARY OF FINDINGS</span>
+            <h3>Accuracy, Access Isolation, Latency, and Security Lift</h3>
             <p>
-              QuickSpaces finds the expected ground-truth file in the top 3 results <strong>90.0%</strong> of the time (<code>9/10</code> queries across spreadsheets, BI charts, call transcripts, and RFCs) in <strong>0.67 ms</strong> median time, verifies <strong>100.0%</strong> of inline citations against real retrieved spans, blocks <strong>100.0%</strong> (<code>5/5</code>) of unauthorized contractor/analyst probes before retrieval, and lifts average Space compliance from <strong>59.7 to 100</strong>.
+              QuickSpaces surfaces the expected source file in the top 3 results on <strong>90.0%</strong> of questions (<code>9/10</code> across spreadsheets, charts, calls, and docs) in <strong>0.67 ms</strong> median latency, verifies <strong>100.0%</strong> of inline citations against retrieved spans, blocks <strong>100.0%</strong> (<code>5/5</code>) of unauthorized access probes ahead of search, and raises mean workspace security readiness from <strong>59.7 to 100</strong>.
             </p>
           </div>
-          <div class="hood-card">
-            <span class="step-badge">UNDER THE HOOD · EXACT BENCHMARK HARNESS</span>
-            <h3>Deterministic Evaluation Contract (<code>benchmarks/run_benchmarks.py</code>)</h3>
+          <div class="mechanics-card">
+            <span class="step-badge">BENCHMARK HARNESS</span>
+            <h3>Evaluation Protocol (<code>benchmarks/run_benchmarks.py</code>)</h3>
             <p>
-              Executes <code>ws.search()</code> + <code>ws.ask()</code> over <code>EVAL_QUERIES</code> (<code>10</code> cross-modal queries), measures wall-clock latency via <code>time.perf_counter()</code> (<code>p50 = 0.67 ms</code>, <code>p95 = 1.15 ms</code>), asserts <code>forbidden_asset_id not in cited_assets</code> across <code>ADVERSARIAL_ACL_PROBES</code> (<code>5/5</code> blocked), and averages <code>ws.remediate_governance()</code> across all 3 Spaces (<code>[45, 75, 59] → [100, 100, 100]</code>).
+              Runs <code>ws.search()</code> and <code>ws.ask()</code> over <code>EVAL_QUERIES</code> (<code>10</code> multi-format queries), times retrieval via <code>time.perf_counter()</code> (<code>p50 = 0.67 ms</code>, <code>p95 = 1.15 ms</code>), verifies <code>forbidden_asset_id not in cited_assets</code> across <code>ADVERSARIAL_ACL_PROBES</code> (<code>5/5</code> blocked), and averages <code>ws.remediate_governance()</code> across all 3 workspaces (<code>[45, 75, 59] → [100, 100, 100]</code>).
             </p>
           </div>
         </div>
         <div class="sim-header">
           <div>
-            <span class="section-kicker">§06 · Benchmarks</span>
-            <h2 class="sim-title">Measured Multi-Modal &amp; Governance Benchmark Suite (<code>benchmarks/latest_results.json</code>)</h2>
-            <p class="sim-desc">Reproducible execution from <code>benchmarks/run_benchmarks.py</code> across <code>10</code> multi-modal Space queries, <code>5</code> adversarial cross-role leakage probes, and <code>3</code> enterprise Spaces.</p>
+            <span class="section-kicker">06 · Benchmarks</span>
+            <h2 class="sim-title">Benchmarks</h2>
+            <p class="sim-desc">Reproducible results from <code>benchmarks/latest_results.json</code> across <code>10</code> workspace queries, <code>5</code> cross-role access probes, and <code>3</code> workspaces.</p>
           </div>
-          <span class="tag tag-pass">100.0% Adversarial ACL Block Rate · 100.0% Citation Span Precision</span>
+          <span class="tag tag-pass">100.0% Access Block Rate · 100.0% Citation Precision</span>
         </div>
 
         <div class="card" style="margin-bottom:1.25rem;">
           <div class="control-label" style="margin-bottom:0.65rem;">
             <span>Measured QuickSpaces Benchmark Results (<code>benchmarks/latest_results.json</code>)</span>
-            <span class="mono" style="font-size:0.7rem;">10 Queries · 5 Adversarial Probes · 3 Spaces</span>
+            <span class="mono" style="font-size:0.7rem;">10 Queries · 5 Access Probes · 3 Workspaces</span>
           </div>
           <div class="table-wrap">
             <table>
@@ -2365,7 +2341,7 @@ AlpineRe-Zurich,27450,1105,388-19-6520,sk-qs-live-72cb39de12a9,elena.rossi@acmec
           </div>
 
           <div class="card">
-            <h3 style="font-size:1.05rem; font-weight:800; margin-bottom:0.65rem;">Measured Breakdown Across Modalities &amp; Spaces</h3>
+            <h3 style="font-size:1.05rem; font-weight:800; margin-bottom:0.65rem;">Measured Breakdown Across Queries &amp; Workspaces</h3>
             <div class="bar-group">
               <div class="bar-row">
                 <div class="bar-meta"><span>Hybrid Top-3 Asset Recall (9 / 10 Eval Queries)</span><span>90.0%</span></div>
@@ -2396,7 +2372,7 @@ AlpineRe-Zurich,27450,1105,388-19-6520,sk-qs-live-72cb39de12a9,elena.rossi@acmec
     <!-- Footer -->
     <footer class="footer">
       <div>
-        <strong>QuickSpaces</strong> — Multi-Modal Enterprise AI Workspace, Pre-Retrieval Hybrid RAG &amp; Governance Agent · Built by Ritwika Reddy Kancharla
+        <strong>QuickSpaces</strong> — Enterprise Team Workspaces Across Spreadsheets, Dashboards, Calls, and Docs · Built by Ritwika Reddy Kancharla
       </div>
       <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
         <a href="https://github.com/ritwikareddykancharla/quickspaces-ai" target="_blank" rel="noopener" style="color:var(--ink); font-weight:700;">GitHub Repository</a>
@@ -2725,14 +2701,12 @@ AlpineRe-Zurich,27450,1105,388-19-6520,sk-qs-live-72cb39de12a9,elena.rossi@acmec
         try {
           const h = await apiGet("/api/health");
           if (h && h.status === "ok") {
-            const py = (h.python_version || "3.12").split(".").slice(0, 2).join(".");
-            const model = h.bedrock_model || "us.amazon.nova-lite-v1:0";
             document.getElementById("runtimeModeText").textContent =
-              `AWS CloudFront + S3 (OAC) + Python ${py} + Bedrock (${model}) Live`;
+              "Live on AWS · Powered by Amazon Bedrock";
           }
         } catch (_) {
           document.getElementById("runtimeModeText").textContent =
-            "Deterministic Studio Active (Connect /api/health for Live Bedrock Nova)";
+            "Interactive Demo · Powered by Amazon Bedrock";
         }
       }
 
@@ -3327,7 +3301,7 @@ AlpineRe-Zurich,27450,1105,388-19-6520,sk-qs-live-72cb39de12a9,elena.rossi@acmec
           });
         } finally {
           btn.disabled = false;
-          btn.textContent = "⚡ Ask Quick AI (Bedrock Nova /api/*)";
+          btn.textContent = "⚡ Ask Quick AI (Live on Amazon Bedrock)";
         }
       };
 
@@ -3453,7 +3427,7 @@ AlpineRe-Zurich,27450,1105,388-19-6520,sk-qs-live-72cb39de12a9,elena.rossi@acmec
           renderGovernancePanel();
         } finally {
           btn.disabled = false;
-          btn.textContent = "⚡ Auto-Remediate All 5 Controls (59.7 → 100)";
+          btn.textContent = "⚡ Fix All 5 Security Controls (59.7 → 100)";
         }
       };
 
@@ -3639,8 +3613,8 @@ AlpineRe-Zurich,27450,1105,388-19-6520,sk-qs-live-72cb39de12a9,elena.rossi@acmec
           plane: "Plane ① · AWS Edge Delivery",
           title: "Workspace Browser Console (Role Switcher, Custom Ingest & Sticky TOC)",
           module: "web/index.html (Self-Contained Neo-Brutalist Single-Page Workspace)",
-          summary: "Renders the 3 governed Enterprise Spaces, dynamic column-level PII redaction viewer, live Ask Quick AI studio with SVG BI chart synthesis, and 5-rule governance auditor with stateless URL persistence via location.hash.",
-          metric: "0 External JS Deps · location.hash State Sync"
+          summary: "Renders the 3 governed workspaces, read-time column PII redaction viewer, live Ask Quick AI studio with SVG chart generation, and 5-rule security auditor using stateless URL state in location.hash.",
+          metric: "Stateless location.hash URL Sync"
         },
         "qs-cloudfront": {
           plane: "Plane ① · AWS Edge Delivery",
